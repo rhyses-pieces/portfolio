@@ -3,31 +3,17 @@ layout: 'layouts/home.html'
 title: 'Home'
 meta:
   desc:
-    '11st-Starter-Kit is a minimal starting point for building static websites
-    with 11ty, powered by Snowpack with Tailwind CSS and Alpine.js.'
+    'Portfolio site for Rhys Kim'
 intro:
-  title: 'Welcome to Your Eleventy App'
+  title: 'Like Reeses’ Pieces?'
   desc:
-    'For a guide and recipes on how to configure / customize this project, check
-    out the <a href="https://www.11ty.dev/docs/" class="text-gray-900
-    font-medium underline">Eleventy</a> and <a href="https://www.snowpack.dev/"
-    class="text-gray-900 font-medium underline">Snowpack</a> documentation.'
+    'Hello! My name is Rhys and I’m a software developer, front end engineer, and style enthusiast!'
 ---
 
-## Community
+## About
 
-[Eleventy](https://www.11ty.dev/news/discord/) -
-[Snowpack](https://discord.com/invite/snowpack) - [Tailwind
-CSS](https://tailwindcss.com/discord) - [Alpine.js](https://discord.gg/CGmj5nq)
+I am very much a
 
-## Awesome
+## Testing
 
-[Eleventy](https://github.com/scottishstoater/awesome-eleventy) -
-[Snowpack](https://github.com/rajasegar/awesome-snowpack) - [Tailwind
-CSS](https://github.com/aniftyco/awesome-tailwindcss) -
-[Alpine.js](https://github.com/alpine-collective/awesome)
-
-## Ecosystem
-
-[Eleventy](https://www.11ty.dev/) - [Snowpack](https://www.snowpack.dev/) -
-[Tailwind CSS](https://tailwindcss.com/) - [Alpine.js](https://github.com/alpinejs/alpine/)
+what's going on?!

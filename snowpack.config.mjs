@@ -1,8 +1,9 @@
 export default {
   mount: {
     'src/_site': { url: '/', static: true },
-    'src/scripts': { url: '/scripts' },
-    'src/styles': { url: '/styles' },
+    'src/_assets/images': { url: '/images' },
+    'src/_assets/scripts': { url: '/scripts' },
+    'src/_assets/styles': { url: '/styles' },
   },
   plugins: ['@snowpack/plugin-postcss'],
   packageOptions: {

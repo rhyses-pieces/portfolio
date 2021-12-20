@@ -1,0 +1,14 @@
+@import './dmvendor.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-mono bg-mint-100;
+
+  background-image: 
+    conic-gradient(at calc(100% - 2px) calc(100% - 2px), #d7d7db85 270deg, #0000 0),
+    conic-gradient(at calc(100% - 1px) calc(100% - 1px), #ececee 270deg, #0000 0);
+  background-size: 7.25rem 7.25rem, 1.45rem 1.45rem;
+}

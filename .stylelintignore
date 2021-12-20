@@ -1,2 +1,4 @@
 dist/*
 src/_site/*
+src/_assets/styles/dmvendor.css
+src/_includes/*
