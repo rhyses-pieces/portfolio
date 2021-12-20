@@ -2,4 +2,5 @@
 
 defaults
 not IE 11
+not Opera Mini
 maintained node versions
