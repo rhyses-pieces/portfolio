@@ -3,17 +3,17 @@
 {% block content %}
 <main id="main-content" tabindex="-1">
   <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold leading-snug p-[2px] text-gray-900">
-      <span class="bg-peach-300 bg-opacity-50 inline p-2 box-decoration-clone">{{ intro.title }}</span>
+    <h1 class="text-3xl font-bold text-gray-900">
+      <span class="header-bg">{{ intro.title }}</span>
     </h1>
   </div>
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 px-">
-    <div class="py-8 text-gray-600 leading-8">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="py-8 text-gray-700 leading-8 font-bold italic">
       <p class="text-xl">
         {{ intro.desc }}
       </p>
     </div>
-    <div class="prose prose-gray prose-lg text-gray-500">
+    <div class="prose prose-lg text-black">
       {{ content }}
     </div>
   </div>

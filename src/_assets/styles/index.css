@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply font-bold leading-snug p-[2px]
+  }
+}
+
+@layer components {
+  .header-bg {
+    @apply bg-peach-300 bg-opacity-50 inline p-2 box-decoration-clone 
+  }
+}
+
 body {
   @apply font-mono bg-mint-100;
 
@@ -12,3 +24,4 @@ body {
     conic-gradient(at calc(100% - 1px) calc(100% - 1px), #ececee 270deg, #0000 0);
   background-size: 7.25rem 7.25rem, 1.45rem 1.45rem;
 }
+

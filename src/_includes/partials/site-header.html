@@ -1,18 +1,13 @@
 <header>
   <nav class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <figure class="flex flex-shrink-0 items-center space-x-1">
-        <img
-          alt="11st starter-kit logo"
-          class="h-8 w-auto"
-          src="/images/11st-logo.svg"
-        />
-        <figcaption>Starter-Kit</figcaption>
-      </figure>
+      <h1 class="flex flex-shrink-0 items-center space-x-1">
+        <span class="header-bg py-1 px-2 rotate-2">hi</span>
+      </h1>
       <ul class="flex space-x-4">
         {% for item in navigation.items %}
           {% if item.url == page.url %}
-            {% assign highlight = 'cursor-default' %}
+            {% assign highlight = 'cursor-default outline-dotted outline-offset-2 outline-peach-500' %}
             {% assign current = 'aria-current="page"' %}
           {% else %}
             {% assign highlight = 'underline' %}
@@ -28,14 +23,6 @@
             </a>
           </li>
         {% endfor %}
-        <li>
-          <a
-            href="https://github.com/stefanfrede/11st-starter-kit/"
-            class="text-base font-bold underline hover:text-green-900"
-          >
-            GitHub
-          </a>
-        </li>
       </ul>
     </div>
   </nav>
