@@ -1,6 +1,6 @@
 ---
 title: hello
-tags: post
+tags: work
 ---
 
 heyy
