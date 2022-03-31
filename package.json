@@ -91,6 +91,6 @@
   },
   "dependencies": {
     "alpinejs": "^3.9.5",
-    "core-js": "^3.21.0"
+    "core-js": "^3.21.1"
   }
 }
