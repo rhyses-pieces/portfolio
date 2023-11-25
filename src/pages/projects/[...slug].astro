@@ -1,0 +1,30 @@
+---
+import Markdown from "@/layouts/Markdown.astro";
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection("projects");
+  return projects.map(project => ({
+    params: { slug: project.slug }, props: { project }
+  }));
+}) satisfies GetStaticPaths;
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+<Markdown>
+  <h2>{project.data.title}</h2>
+  <time datetime={project.data.date?.toISOString()}>{project.data.date}</time>
+  <ul>
+    {project.data.tags.map((tag) => (
+      <li>{tag}</li>
+    ))}
+  </ul>
+  <Content />
+</Markdown>

@@ -1,0 +1,70 @@
+<button id="theme-switch" aria-labelledby="theme-switch-label" transition:persist>
+  <span id="theme-switch-label" hidden>Switch theme</span>
+  <svg xmlns="http://www.w3.org/2000/svg" id="theme-icon" role="img" aria-labelledby="theme-icon-label" focusable="false" viewBox="0 0 24 24">
+    <title id="theme-icon-label">Set theme</title>
+    <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.3 17.7-1.4 1.4"/><path d="m19.1 4.9-1.4 1.4"/>
+  </svg>
+</button>
+
+<style>
+  #theme-icon {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    stroke: currentColor;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.75rem;
+    padding: 0.75rem;
+    color: var(--text-on-secondary);
+    background: var(--secondary);
+
+    &:hover, &:focus { 
+      color: var(--text-on-accent);
+      background-color: var(--accent);
+    }
+  }
+</style>
+
+<script is:inline>
+  const button = document.getElementById("theme-switch");
+  const icon = document.getElementById("theme-icon");
+
+  const theme = (() => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) return localStorage.getItem("theme");
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+    return "light";
+  })();
+
+  document.documentElement.setAttribute("data-theme", theme || "light");
+  icon.innerHTML = theme === "dark" ? `<title id="theme-icon-label">Dark mode</title><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>` : `<title id="theme-icon-label">Light mode</title><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>`;
+
+  button?.addEventListener("click", () => {
+    if (document.documentElement.getAttribute("data-theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "light");
+      icon.innerHTML = `<title id="theme-icon-label">Light mode</title><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>`;
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      icon.innerHTML = `<title id="theme-icon-label">Dark mode</title><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>`;
+      localStorage.setItem("theme", "dark");
+    }
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+      icon.innerHTML = `<title id="theme-icon-label">Dark mode</title><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>`;
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      icon.innerHTML = `<title id="theme-icon-label">Light mode</title><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>`;
+    }
+  });
+</script>

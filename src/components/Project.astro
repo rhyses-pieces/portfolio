@@ -1,0 +1,153 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  slug: string;
+  date: Date | undefined;
+  tags: string[];
+}
+
+const { id, title, slug, date, tags } = Astro.props;
+---
+<article id={id} class="project">
+  <h1><a href={slug}>{title}</a></h1>
+  {date ? <time datetime={date.toISOString()}>{date}</time> : null}
+  <ul>
+    {tags.map(tag => (
+      <li class="tag">{tag}</li>
+    ))}
+  </ul>
+</article>
+
+<style>
+  article {
+    padding: 1.5rem;
+    border: var(--border) color-mix(in oklab, var(--background), #000);
+    border-radius: var(--container-radius);
+
+    & h1 {
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+
+      & a {
+        --red: hsl(2 53% 62%);
+        --orange: hsl(24 50% 54%);
+        --yellow: hsl(40 40% 48%);
+        --green: hsl(118 24% 52%);
+        --blue: hsl(164 33% 48%);
+        --indigo: hsl(185 38% 48%);
+
+        text-decoration: underline wavy var(--text) 2px;
+        text-underline-offset: 0.35rem;
+      }
+    }
+
+    & time {
+      font-family: var(--accent-font);
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    & ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 1rem;
+      margin-bottom: 0;
+      padding: 0;
+
+      & > li {
+        --red: hsl(5 65% 93%);
+        --orange: hsl(23 71% 91%);
+        --yellow: hsl(39 70% 88%);
+        --green: hsl(116 57% 89%);
+        --blue: hsl(161 67% 87%);
+        --indigo: hsl(185 66% 88%);
+        --text-on-red: hsl(1 42% 31%);
+        --text-on-orange: hsl(24 53% 25%);
+        --text-on-yellow: hsl(40 49% 22%);
+        --text-on-green: hsl(118 27% 24%);
+        --text-on-blue: hsl(164 40% 22%);
+        --text-on-indigo: hsl(185 46% 22%);
+        line-height: 1;
+        padding: 0.5rem;
+        border: var(--border) color-mix(in oklab, var(--background), #000 25%);
+        border-radius: var(--border-radius);
+
+        &.active {
+          --red: hsl(2 39% 52%);
+          --orange: hsl(24 47% 44%);
+          --yellow: hsl(40 43% 39%);
+          --green: hsl(118 24% 42%);
+          --blue: hsl(164 35% 39%);
+          --indigo: hsl(185 40% 39%);
+          color: #fff !important;
+          border-color: transparent;
+          outline: 2px dashed var(--accent);
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+
+  :global([data-theme=dark]) article {
+    border-color: color-mix(in oklab, var(--background), #fff);
+
+    & h1 a {
+      --red: hsl(358 51% 63%);
+      --orange: hsl(21 50% 55%);
+      --yellow: hsl(38 40% 49%);
+      --green: hsl(107 25% 50%);
+      --blue: hsl(159 31% 49%);
+      --indigo: hsl(182 35% 47%);
+    }
+
+    & ul > li {
+      --red: hsl(358 66% 5%);
+      --orange: hsl(15 78% 4%);
+      --yellow: hsl(31 76% 3%);
+      --green: hsl(110 53% 3%);
+      --blue: hsl(154 64% 3%);
+      --indigo: hsl(183 70% 3%);
+      --text-on-red: hsl(1 63% 91%);
+      --text-on-orange: hsl(20 69% 89%);
+      --text-on-yellow: hsl(37 69% 86%);
+      --text-on-green: hsl(107 55% 85%);
+      --text-on-blue: hsl(156 64% 84%);
+      --text-on-indigo: hsl(182 62% 84%);
+      border-color: color-mix(in oklab, var(--background), #fff 25%);
+
+      &.active {
+        --red: hsl(357 38% 52%);
+        --orange: hsl(22 45% 45%);
+        --yellow: hsl(38 43% 40%);
+        --green: hsl(107 26% 41%);
+        --blue: hsl(160 33% 39%);
+        --indigo: hsl(182 38% 38%);
+        color: #fff !important;
+        border-color: transparent;
+        outline: 2px dashed var(--accent);
+        outline-offset: 2px;
+      }
+    }
+  }
+
+  .hide { display: none; }
+  .show { display: block; }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const colors = ["red", "orange", "yellow", "green", "blue", "indigo"];
+    const randomColor = (array: string[]) => { return array[Math.floor(Math.random() * array.length)] };
+    document.querySelectorAll("article > h1 a").forEach(element => {
+      (element as HTMLElement).style.textDecorationColor = `var(--${randomColor(colors)})`;
+    })
+    document.querySelectorAll(".tag").forEach(tag => {
+      let color = randomColor(colors);
+      (tag as HTMLElement).style.backgroundColor = `var(--${color})`;
+      (tag as HTMLElement).style.color = `var(--text-on-${color})`;
+    });
+  });
+</script>

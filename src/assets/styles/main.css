@@ -1,0 +1,136 @@
+@import "./modern-normalize.css";
+
+@font-face {
+  font-family: "Galmuri";
+  src: url('/fonts/Galmuri11.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Galmuri";
+  src: url('/fonts/Galmuri11-Bold.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Intel";
+  src: url("/fonts/IntelOneMono-Regular.woff") format('woff'),
+       url("/fonts/IntelOneMono-Regular.woff2") format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Intel";
+  src: url("/fonts/IntelOneMono-Bold.woff") format('woff'),
+       url("/fonts/IntelOneMono-Bold.woff2") format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Xenon";
+  src: url('/fonts/MonaspaceXenonVarVF[wght\,wdth\,slnt].woff') format('woff'),
+       url('/fonts/MonaspaceXenonVarVF[wght\,wdth\,slnt].woff2') format('woff2');
+  font-weight: 350 700;
+  font-stretch: 100% 125%;
+  font-style: italic 0deg;
+  font-feature-settings: "calt", "ss01", "ss03";
+}
+
+[data-theme="light"] {
+  --text: hsl(240, 88%, 10%);
+  --background: hsl(250, 60%, 94%);
+  --primary: hsl(279, 26%, 75%);
+  --secondary: hsl(250, 30%, 85%);
+  --accent: hsl(250, 3%, 42%);
+  --text-on-primary: #000000;
+  --text-on-secondary: #000000;
+  --text-on-accent: #ffffff;
+}
+
+[data-theme="dark"] {
+  --text: hsl(240, 88%, 90%);
+  --background: hsl(250, 60%, 6%);
+  --primary: hsl(279, 26%, 29%);
+  --secondary: hsl(250, 30%, 15%);
+  --accent: hsl(250, 3%, 58%);
+  --text-on-primary: #ffffff;
+  --text-on-secondary: #ffffff;
+  --text-on-accent: #ffffff;
+}
+
+:root {
+  --body-font: "Xenon", 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+  --heading-font: "Galmuri", Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  --accent-font: "Intel", ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --border-radius: 4px;
+  --border: 2px solid;
+  --container-radius: 8px;
+}
+
+html { font-size: 100%; }
+
+body {
+  font-family: var(--body-font);
+  color: var(--text);
+  background: var(--background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  font-weight: bold;
+  letter-spacing: 0.15rem;
+}
+
+h4, h5, h6 { font-weight: normal; }
+
+h1 {font-size: 4.210rem; /* 67.36px */}
+h2 {font-size: 3.158rem; /* 50.56px */}
+h3 {font-size: 2.369rem; /* 37.92px */}
+h4 {font-size: 1.777rem; /* 28.48px */}
+h5 {font-size: 1.333rem; /* 21.28px */}
+
+small {font-size: 0.750rem; /* 12px */}
+
+a {
+  color: var(--accent);
+
+  &:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+}
+
+button {
+  cursor: pointer;
+  color: var(--text-on-primary);
+  background: var(--primary);
+  padding: 0.5rem 0.75rem;
+  font-family: var(--accent-font);
+  font-size: 1rem;
+  border: var(--border) color-mix(in oklab, var(--primary), #000);
+  border-radius: var(--border-radius);
+
+  &:hover, &:focus { background-color: var(--secondary); }
+}
+
+[data-theme="dark"] button { border-color: color-mix(in oklab, var(--primary), #fff); }
+
+:focus {
+  outline: 2px solid color-mix(in oklab, var(--text), #fff);
+  outline-offset: 2px;
+}
+
+input, textarea {
+  color: var(--text);
+  padding: 0.5rem;
+  background-color: color-mix(in oklab, var(--background), #000 10%);
+  border: var(--border) color-mix(in oklab, var(--text), #fff 25%);
+  border-radius: var(--border-radius);
+}
+
+[data-theme="dark"] input, textarea {
+  background-color: color-mix(in oklab, var(--background), #fff 10%);
+  border-color: color-mix(in oklab, var(--text), #000 25%);
+}
+
+[data-theme="dark"]:focus { outline-color: color-mix(in oklab, var(--text), #000); }
