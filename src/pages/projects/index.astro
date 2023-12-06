@@ -4,29 +4,29 @@ import Base from "@/layouts/Base.astro";
 import Project from "@/components/Project.astro";
 
 const projects = await getCollection("projects");
-const tags: string[] = [];
-projects.forEach(item => item.data.tags.forEach(tag => tags.push(tag)));
-const tagsList = Array.from(new Set(tags));
+const tags = [...new Set(projects.map(project => project.data.tags).flat())].slice(0,5);
 ---
-<Base>
-  <h1>Projects</h1>
+<Base title="rhyses pieces | projects">
   <section>
-    <nav>
-      Tags list:
+    <h1>Projects</h1>
+    <div aria-label="filter by tag">
+      Tags list: 
       <div>
-      {tagsList.map(tag => (
-        <button class="filter" aria-pressed="false">{tag}</button>
-      ))}
+        {tags.map(tag => (
+          <button type="button" class="filter" aria-pressed="false">{tag}</button>
+        ))}
       </div>
+      {(tags.length === 5) ? (<a href="/projects/tags">See more tags?</a>) : null}
       <button id="reset-tags">Reset</button>
-    </nav>
-    {projects?.map((project) => (
+    </div>
+    {projects?.map(project => (
       <Project 
-        id={project.id}
         title={project.data.title} 
         slug={`/projects/${project.slug}`}
         date={project.data.date}
         tags={project.data.tags}
+        imageUrl={project.data.image.source.src}
+        imageAlt={project.data.image.alt}
       />
     ))}
   </section>
@@ -39,12 +39,15 @@ const tagsList = Array.from(new Set(tags));
     grid-auto-flow: row;
     gap: 1.5rem;
 
-    & nav { 
+    & h1 { margin-bottom: 0; }
+
+    & [aria-label="filter by tag"] { 
       grid-column: 1 / -1;
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
       gap: 1rem;
+      margin-bottom: 1rem;
 
       & div {
         flex: 1 1 500px;
@@ -57,8 +60,8 @@ const tagsList = Array.from(new Set(tags));
           white-space: nowrap;
           &::before { content: "#"; }
           &[aria-pressed="true"] { 
-            color: var(--text-on-accent);
-            background-color: var(--accent);
+            color: var(--text-on-secondary);
+            background-color: var(--secondary);
           }
         }
       }
@@ -78,26 +81,18 @@ const tagsList = Array.from(new Set(tags));
     const tagButtons = document.querySelectorAll(".filter");
     tagButtons.forEach(button => {
       button.addEventListener("click", event => {
-        const target = (event.target as HTMLElement).innerHTML;
-        (button.getAttribute("aria-pressed") === "false")
-          ? button.setAttribute("aria-pressed", "true")
-          : button.setAttribute("aria-pressed", "false");
+        const target = (event.target as HTMLElement);
+        let pressed: boolean = JSON.parse(target.getAttribute("aria-pressed")!);
+        target.setAttribute("aria-pressed", String(!pressed));
         projects.forEach(element => {
-          if (button.getAttribute("aria-pressed") === "true") {
-            (element as HTMLElement).classList.remove("hide");
-          }
           let match = Array.from(element.querySelectorAll(".tag"));
-          if (match.some(tag => tag.innerHTML === target)) {
+          if (match.some(tag => tag.innerHTML === target.innerHTML)) {
             match.filter(tagElement => {
-              if (tagElement.innerHTML === target) {
-                (tagElement as HTMLElement).classList.toggle("active");
-              }
+              if (tagElement.innerHTML === target.innerHTML) { (tagElement as HTMLElement).classList.toggle("active"); }
             });
             (element as HTMLElement).classList.toggle("show");
           } else {
-            (button.getAttribute("aria-pressed") === "false")
-              ? (element as HTMLElement).classList.remove("hide")
-              : (element as HTMLElement).classList.add("hide");
+            (pressed) ? (element as HTMLElement).classList.remove("hide") : (element as HTMLElement).classList.add("hide");
           }
         });
       });

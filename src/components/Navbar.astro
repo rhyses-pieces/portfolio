@@ -1,31 +1,49 @@
 ---
+import Navlink from "./Navlink.astro";
 import ThemeSwitch from "./ThemeSwitch.astro";
----
 
-<nav>
+const links = [
+  { name: "Home", slug: "/" },
+  { name: "About", slug: "/about" },
+  { name: "Projects", slug: "/projects" },
+  { name: "Contact", slug: "/contact" },
+];
+---
+<nav aria-label="main navigation">
   <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/projects">Projects</a></li>
-    <li><a href="/contact">Contact</a></li>
+    {links.map((link, index) => (
+      <Navlink name={link.name} slug={link.slug} index={index} />
+    ))}
   </ul>
   
-  <ThemeSwitch />
+  <ThemeSwitch transition:name="theme" />
 </nav>
 
 <style>
   nav {
+    padding: 1rem;
     display: flex;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    background-color: var(--secondary);
+    border-bottom: var(--border) var(--border-color);
+
+    & ul {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
   }
 
-  ul {
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  @media screen and (max-width: 800px) {
+    nav > ul { 
+      flex-direction: column; 
+      width: 100%;
+    }
   }
 </style>

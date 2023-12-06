@@ -1,8 +1,27 @@
 ---
 import Base from "./Base.astro";
+
+interface Props {
+  transitionName: string;
+  frontmatter: any;
+}
+
+const { transitionName, frontmatter } = Astro.props;
 ---
-<Base>
-  <article>
+<Base title={`rhyses pieces | ${frontmatter.title}`}>
+  <article transition:name={transitionName}>
     <slot />
   </article>
 </Base>
+
+<style>
+  article {
+    p { line-height: 1.75; }
+    h1 {font-size: 2.489rem; /* 39.84px */}
+    h2 {font-size: 2.074rem; /* 33.12px */}
+    h3 {font-size: 1.728rem; /* 27.68px */}
+    h4 {font-size: 1.440rem; /* 23.04px */}
+    h5 {font-size: 1.200rem; /* 19.2px */}
+    small {font-size: 0.833rem; /* 13.28px */}
+  }
+</style>

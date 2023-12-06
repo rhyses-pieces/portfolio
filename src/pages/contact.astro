@@ -1,18 +1,48 @@
 ---
 import Base from "@/layouts/Base.astro";
 ---
-
-<Base>
+<Base title="rhyses pieces | contact">
   <h1>contact me</h1>
-  <form method="post">
+  <p>You can find me at my socials here:</p>
+  <ul>
+    <li><a href="https://github.com/rhyses-pieces" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/irene-kim-1a8079115/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+  </ul>
+
+  <form action="https://getform.io/f/c96e71cd-516b-41cb-9fd6-5a353b381ef3" method="post">
     <label for="name">
-      <input type="text" />
+      Name
+      <input type="text" name="name" id="name" required />
     </label>
-    <label>
-      <input type="email" />
+    <label for="email">
+      Email
+      <input type="email" name="email" id="email" required />
     </label>
     <label for="">
-      
+      Message
+      <textarea name="message" id="message" cols="30" rows="10" required />
     </label>
+    <input type="hidden" name="_gotcha" style="display:none" />
+    <button type="submit">Send</button>
   </form>
 </Base>
+
+<style>
+  form {
+    display: flex;
+    flex-flow: column;
+    
+    & label {
+      display: flex;
+      flex-flow: inherit;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    & button {
+      width: min-content;
+      align-self: center;
+      font-size: 2rem;
+    }
+  }
+</style>

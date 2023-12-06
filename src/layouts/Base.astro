@@ -1,34 +1,14 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "../components/Navbar.astro";
-import "../assets/styles/main.css";
+import Navbar from "@/components/Navbar.astro";
+import "@/assets/styles/main.css";
 
-const title = "rhyses pieces";
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
-
-<script is:inline>
-  const store = localStorage.getItem("theme");
-  const getPreference = () => {
-    if (typeof localStorage !== "undefined" && store) {
-      return store;
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-  document.documentElement.setAttribute("data-theme", getPreference());
-
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
-    if (e.matches) { 
-      document.documentElement.setAttribute("data-theme", "dark");
-      document.getElementById("theme-icon").innerHTML = `<title id="theme-icon-label">Dark mode</title><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>`;
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-      document.getElementById("theme-icon").innerHTML = `<title id="theme-icon-label">Light mode</title><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>`;
-    }
-  });
-</script>
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -37,18 +17,38 @@ const title = "rhyses pieces";
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
+    <script src="../assets/head.js"></script>
   </head>
   <body>
     <header>
+      <a href="#content">Skip to content</a>
       <Navbar />
     </header>
-    <main>
+    <main id="content" transition:animate="fade">
       <slot />
     </main>
   </body>
 </html>
 
 <style>
+  a {
+    position: absolute;
+    left: 0.35rem;
+    padding: 0.5rem;
+    color: var(--background);
+    background-color: var(--text);
+    text-decoration-color: var(--background);
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      color: var(--text);
+      background-color: var(--background);
+      text-decoration-color: var(--text);
+    }
+    &:focus { transform: translateY(20%); }
+  }
+
   main {
     max-width: 1000px;
     margin: 0 auto;

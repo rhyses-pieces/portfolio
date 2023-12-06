@@ -1,10 +1,14 @@
 ---
 draft: false
 title: true that
-image: { url: /unspalsh.png, alt: this is a piocture}
+date: 2023-11-29
+image:
+  source: /src/assets/images/Ishida Sui.jpg
+  alt: this is a piocture
+  caption: this is me
 tags:
-  - hi
-  - how
+  - astro
+  - css
+  - html
 ---
-
 this is the body

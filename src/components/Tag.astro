@@ -1,0 +1,79 @@
+---
+import type { TransitionAnimationPair, TransitionDirectionalAnimations } from 'astro';
+
+interface Props {
+  tag: string;
+  index: number;
+};
+
+const { tag, index } = Astro.props;
+
+const anim: TransitionAnimationPair = {
+  old: {
+    name: "slideDown",
+    duration: "0.3s",
+    easing: "ease-out",
+    fillMode: "backwards",
+  },
+  new: {
+    name: "slideUp",
+    duration: "0.3s",
+    delay: `${index * 0.1 + 0.1}s`,
+    easing: "ease-in",
+    fillMode: "backwards",
+  }
+};
+
+const verticalSlide: TransitionDirectionalAnimations = {
+  forwards: anim,
+  backwards: anim,
+};
+---
+
+<li transition:animate={verticalSlide}><a href=`/projects/tags/${tag}` class="tag">{tag}</a></li>
+
+<style>
+  .tag {
+    display: inline-block;
+    line-height: 1;
+    padding: 0.5rem;
+    text-decoration-color: var(--border-color);
+    border: var(--border) var(--border-color);
+    border-radius: var(--border-radius);
+
+    &::before { content: "#"; }
+    &.active {
+      --red-bg: var(--red);
+      --orange-bg: var(--orange);
+      --yellow-bg: var(--yellow);
+      --green-bg: var(--green);
+      --blue-bg: var(--blue);
+      --indigo-bg: var(--indigo);
+      color: #fff !important;
+      text-decoration-color: #fff !important;
+      border-color: transparent;
+      outline: 2px dashed var(--primary);
+      outline-offset: 2px;
+    }
+  }
+
+  :global([data-theme=dark]) {
+    &.active {
+      color: #000 !important;
+      border-color: transparent;
+      outline-offset: 2px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const colors = ["red", "orange", "yellow", "green", "blue", "indigo"];
+    const randomColor = (array: string[]) => { return array[Math.floor(Math.random() * array.length)] };
+    document.querySelectorAll(".tag").forEach(tag => {
+      let color = randomColor(colors);
+      (tag as HTMLElement).style.backgroundColor = `var(--${color}-bg)`;
+      (tag as HTMLElement).style.color = `var(--text-on-${color})`;
+    });
+  })
+</script>

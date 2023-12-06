@@ -1,8 +1,9 @@
 ---
-import Markdown from "@/layouts/Markdown.astro";
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
+import Markdown from "@/layouts/Markdown.astro";
+import Figure from "@/components/Figure.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -18,13 +19,51 @@ export const getStaticPaths = (async () => {
 const { project } = Astro.props;
 const { Content } = await project.render();
 ---
-<Markdown>
-  <h2>{project.data.title}</h2>
-  <time datetime={project.data.date?.toISOString()}>{project.data.date}</time>
-  <ul>
+<Markdown frontmatter={project.data} transitionName={`project ${project.slug}`}>
+  <Figure src={project.data.image.source.src} alt={project.data.image.alt} />
+  <header>
+    <h1 transition:name={`project ${project.slug} header`}>{project.data.title}</h1>
+    <a href="/projects">return?</a>
+  </header>
+  <time datetime={project.data.date.toISOString()}>{project.data.date}</time>
+  <ul class="tags">
     {project.data.tags.map((tag) => (
       <li>{tag}</li>
     ))}
   </ul>
   <Content />
 </Markdown>
+
+<style>
+  header {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+
+    & > a { white-space: nowrap; }
+    & h1 { 
+      flex-grow: 1; 
+      margin-bottom: 0;
+    }
+    /* snippet from https://css-tricks.com/useful-flexbox-technique-alignment-shifting-wrapping/ */
+  }
+
+  time { font-size: 1rem; }
+
+  .tags {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--accent-font);
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 2rem;
+    border-top: var(--border) var(--border-color);
+    border-bottom: var(--border) var(--border-color);
+
+    & > li {
+      padding: 0.5rem 0.5rem 0.5rem 0.15rem;
+
+      &::marker { content: "#"; }
+    }
+  }
+</style>

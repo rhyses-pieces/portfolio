@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import Base from "@/layouts/Base.astro";
+
+const projects = await getCollection("projects");
+const tags = [...new Set(projects.map(project => project.data.tags).flat())];
+---
+<Base title="rhyses pieces | tags">
+  <section>
+    <h1>Filter projects by tags</h1>
+    <nav aria-label="tag navigation">
+      <ul>
+        {tags.map(tag => (
+          <li><a href={`/projects/tags/${tag}`}>{tag}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</Base>

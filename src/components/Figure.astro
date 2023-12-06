@@ -1,11 +1,44 @@
 ---
-import { Image } from "astro:assets";
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+};
 const { src, alt, caption } = Astro.props;
 ---
-
 <figure>
-  <Image src={src} alt={alt} />
-  {caption 
-    ? (<figcaption>{caption}</figcaption>) 
-    : (<figcaption>{alt}</figcaption>)}
+  <img loading="lazy" src={src} alt={alt} />
+  <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
+
+<style>
+  figure {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    padding: 1.25rem 0.75rem;
+    background-color: #fff;
+    border: var(--border) var(--border-color);
+    border-radius: var(--border-radius);
+
+    & figcaption {
+      text-align: center;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+    }
+    & img { 
+      aspect-ratio: 12/7;
+      object-fit: cover;
+      object-position: top;
+      max-width: 100%;
+      height: auto;
+      border: var(--border) var(--border-color);
+    }
+
+    &:nth-of-type(2) { transform: rotate(1deg); }
+    &:nth-of-type(2n-1) { transform: rotate(-0.5deg); }
+    &:nth-of-type(3) { transform: rotate(-1deg); }
+  }
+
+  :global([data-theme="dark"]) figure { background-color: #000; }
+</style>
