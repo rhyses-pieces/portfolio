@@ -1,0 +1,28 @@
+---
+const { el, ...attrs } = Astro.props;
+---
+<f-f el={el} {...attrs}><slot /></f-f>
+
+<script>
+  // source: https://github.com/rodenacker/FormSpamPrevention
+  class formField extends HTMLElement {
+    constructor() {
+      super();
+      const el = this.getAttribute("el");
+      let attrs: any = this.getAttributeNames().reduce((accessor, name) => {
+        return {...accessor, [name]: this.getAttribute(name)};
+      }, {});
+      
+      const element = document.createElement(`${el}`);
+      for (const key in attrs) {
+        if (attrs.hasOwnProperty(key) && key !== "el") {
+          element.setAttribute(`${key}`, `${attrs[key]}`);
+        }
+      }
+      this.parentNode?.insertBefore(element, this);
+      this.remove();
+    }
+  }
+
+  customElements.define("f-f", formField);
+</script>
