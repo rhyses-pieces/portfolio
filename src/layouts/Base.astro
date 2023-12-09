@@ -15,13 +15,14 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <slot name="meta" />
     <title>{title}</title>
     <ViewTransitions />
-    <script src="../assets/head.js"></script>
+    <script src="../assets/head.ts"></script>
   </head>
   <body>
     <header>
-      <a href="#content">Skip to content</a>
+      <a id="skip-link" href="#content">Skip to content</a>
       <Navbar />
     </header>
     <main id="content" transition:animate="fade">
@@ -30,8 +31,8 @@ const { title } = Astro.props;
   </body>
 </html>
 
-<style>
-  a {
+<style is:global>
+  a#skip-link {
     position: absolute;
     left: 0.35rem;
     padding: 0.5rem;
@@ -53,14 +54,17 @@ const { title } = Astro.props;
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 1rem;
-  }
 
-  main:not(h1, h2, h3, h4, h5, h6, button, input, textarea) { font-size: 1.125rem; }
+    & > :not(h1, h2, h3, h4, h5, h6, button, input, textarea) {
+      font-size: 1.125rem;
 
-  @supports (font-feature-settings: "calt") and (font-stretch: 110%) {
-    main:not(h1, h2, h3, h4, h5, h6, button, input, textarea) {
-      font-feature-settings: "calt";
-      font-stretch: 110%;
+      @supports (font-feature-settings: "calt") and (font-stretch: 110%) {
+        font-feature-settings: "calt";
+        font-stretch: 110%;
+      }
     }
+    & p { line-height: 1.75; }
+    & > :first-child { margin-top: 2rem; }
+    & > h1:first-of-type { margin-bottom: 1rem; }
   }
 </style>

@@ -39,8 +39,6 @@ const tags = [...new Set(projects.map(project => project.data.tags).flat())].sli
     grid-auto-flow: row;
     gap: 1.5rem;
 
-    & h1 { margin-bottom: 0; }
-
     & [aria-label="filter by tag"] { 
       grid-column: 1 / -1;
       display: flex;

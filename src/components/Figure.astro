@@ -4,10 +4,11 @@ interface Props {
   alt: string;
   caption?: string;
 };
+
 const { src, alt, caption } = Astro.props;
 ---
 <figure>
-  <img loading="lazy" src={src} alt={alt} />
+  <img loading="lazy" decoding="async" src={src} alt={alt} />
   <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
 
@@ -30,14 +31,9 @@ const { src, alt, caption } = Astro.props;
       aspect-ratio: 12/7;
       object-fit: cover;
       object-position: top;
-      max-width: 100%;
       height: auto;
       border: var(--border) var(--border-color);
     }
-
-    &:nth-of-type(2) { transform: rotate(1deg); }
-    &:nth-of-type(2n-1) { transform: rotate(-0.5deg); }
-    &:nth-of-type(3) { transform: rotate(-1deg); }
   }
 
   :global([data-theme="dark"]) figure { background-color: #000; }

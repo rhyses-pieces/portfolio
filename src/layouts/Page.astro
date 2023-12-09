@@ -1,0 +1,13 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+import Base from "./Base.astro";
+
+type Props = MarkdownLayoutProps<{
+  title: string;
+}>
+
+const { frontmatter } = Astro.props;
+---
+<Base title={`rhyses pieces | ${frontmatter.title}`}>
+  <slot />
+</Base>
