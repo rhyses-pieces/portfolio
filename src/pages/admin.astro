@@ -1,0 +1,23 @@
+---
+if (import.meta.env.PROD) {
+  return Astro.redirect("/");
+}
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^4.0.0/dist/main.css" />
+    <link rel="cms-config-url" href="/admin/config.yaml" type="text/yaml" />
+    <title>Content Manager</title>
+  </head>
+  <body>
+    <!-- Include the script that builds the page and powers Static CMS -->
+    <script is:inline src="https://unpkg.com/@staticcms/app@^4.0.0/dist/static-cms-app.js"></script>
+    <script is:inline>
+      window.CMS.init();
+    </script>
+  </body>
+</html>

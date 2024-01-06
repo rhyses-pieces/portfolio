@@ -5,6 +5,9 @@ import Project from "@/components/Project.astro";
 
 const projects = await getCollection("projects");
 const tags = [...new Set(projects.map(project => project.data.tags).flat())].slice(0,5);
+const sortedProjects = projects
+  .filter(project => { return import.meta.env.PROD ? project.data.draft !== true : true; })
+  .sort((a, b) => { return b.data.date.getTime() - a.data.date.getTime(); });
 ---
 <Base title="rhyses pieces | projects">
   <section>
@@ -19,7 +22,7 @@ const tags = [...new Set(projects.map(project => project.data.tags).flat())].sli
       {(tags.length === 5) ? (<a href="/projects/tags">See more tags?</a>) : null}
       <button id="reset-tags">Reset</button>
     </div>
-    {projects?.map(project => (
+    {sortedProjects?.map(project => (
       <Project 
         title={project.data.title} 
         slug={`/projects/${project.slug}`}

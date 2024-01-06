@@ -2,6 +2,8 @@ backend:
   name: github
   repo: rhyses-pieces/portfolio
 
+local_backend: true
+publish_mode: editorial_workflow
 media_folder: src/assets/images
 
 collections:
@@ -13,15 +15,15 @@ collections:
     fields: 
       - { label: Title, name: title, widget: string }
       - { label: Draft, name: draft, widget: boolean, default: true }
-      - { label: Publish Date, name: date, widget: datetime }
+      - { label: Publish Date, name: date, widget: datetime, format: yyyy-MM-dd, date_format: "MMMM qo, yyyy", time_format: false }
       - label: Image
         name: image
         widget: object
-        required: false
         collapsed: false
         fields: 
           - { label: Source, name: source, widget: image }
           - { label: Alternative Text, name: alt, widget: string }
           - { label: Caption, name: caption, widget: string, required: false }
+      - { label: Project Link, name: projectUrl, widget: string }
       - { label: Tags, name: tags, widget: list }
       - { label: Body, name: body, widget: markdown }

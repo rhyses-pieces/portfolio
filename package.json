@@ -3,25 +3,18 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host 127.0.0.1",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "wrangler pages dev ./dist",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.1",
-    "@astrojs/cloudflare": "^8.0.0",
-    "@astrojs/markdoc": "^0.8.0",
-    "@astrojs/react": "^3.0.7",
-    "@keystatic/astro": "^2.0.3",
-    "@keystatic/core": "^0.2.6",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "4.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "typescript": "^5.2.2"
+    "@astrojs/check": "0.3.4",
+    "@astrojs/cloudflare": "8.0.2",
+    "astro": "4.1.0",
+    "typescript": "^5.2.2",
+    "vest": "^5.2.6"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231121.0",

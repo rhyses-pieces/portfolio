@@ -11,7 +11,7 @@ const projectCollection = defineCollection({
       alt: z.string(),
       caption: z.string().optional(),
     }),
-    // projectUrl: z.string().url(),
+    projectUrl: z.string().url(),
     tags: z.array(z.string()),
   }),
 });

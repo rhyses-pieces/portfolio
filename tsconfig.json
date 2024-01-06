@@ -4,7 +4,7 @@
   ],
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "/home/kewlie_arch/projects/portfolio-draft",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"

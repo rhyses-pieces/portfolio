@@ -9,10 +9,10 @@ const { el, ...attrs } = Astro.props;
     constructor() {
       super();
       const el = this.getAttribute("el");
-      let attrs: any = this.getAttributeNames().reduce((accessor, name) => {
+      let attrs: {[key: string]: string} = this.getAttributeNames().reduce((accessor, name) => {
         return {...accessor, [name]: this.getAttribute(name)};
       }, {});
-      
+      console.log(typeof attrs);
       const element = document.createElement(`${el}`);
       for (const key in attrs) {
         if (attrs.hasOwnProperty(key) && key !== "el") {
