@@ -1,0 +1,37 @@
+---
+import Base from "@/layouts/Base.astro";
+import type { TransitionAnimationPair, TransitionDirectionalAnimations } from "astro";
+
+const anim: TransitionAnimationPair = {
+  old: {
+    name: "slideDown",
+    duration: "0.3s",
+    easing: "ease-out",
+    fillMode: "backwards",
+  },
+  new: {
+    name: "slideUp",
+    duration: "0.3s",
+    easing: "ease-in",
+    fillMode: "backwards",
+  }
+};
+
+const verticalSlide: TransitionDirectionalAnimations = {
+  forwards: anim,
+  backwards: anim,
+};
+---
+<Base title="rhyses pieces | Thank you">
+  <section>
+    <h1 transition:animate={verticalSlide}>Thank you!</h1>
+  </section>
+</Base>
+
+<style>
+  section {
+    display: grid;
+    place-content: center;
+    height: 80vh;
+  }
+</style>

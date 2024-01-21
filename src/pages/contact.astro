@@ -11,13 +11,14 @@ if (Astro.request.method === "POST") {
       name: form.get("name")?.toString(),
       email: form.get("email")?.toString(),
       message: form.get("message")?.toString(),
+      _gotcha: form.get("_gotcha")?.toString(),
     }
     const validationResult = suite(data);
     
     if (validationResult.isValid()) {
-      const url = `https://script.google.com/macros/s/AKfycbzori2u_tMDq_9FmorLbU6kG65r68whXMCO8rVPjsgpBWHizf6rzHG3gLG04jc45AQR4w/exec`;
+      const url = `https://script.google.com/macros/s/${import.meta.env.SHEETS_ID}/exec`;
 
-      const response = await fetch(url, {
+      fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -25,8 +26,7 @@ if (Astro.request.method === "POST") {
         },
       });
 
-      const result = await response.json();
-      console.log(result);
+      return Astro.redirect("/thank-you", 302);
     } else {
       if (validationResult.hasErrors("name")) {
         errors.name += validationResult.getErrors("name")[0];
@@ -59,25 +59,28 @@ if (Astro.request.method === "POST") {
   <p>... or you can: </p>
 
   <h2>Send me a message</h2>
-  <form id="contact" action="#" method="post" novalidate>
+  <form id="contact" method="post" novalidate>
     <label for="name">
       Name
-      <FormField el="input" type="text" name="name" id="name" aria-describedby="name-help" />
+      <FormField el="input" type="text" name="name" id="name" aria-describedby="name-help" required />
     </label>
-    <small class="help" id="name-help">Name is required.</small>
-    {errors.name && <small class="error" id="name-help"><strong>Error:</strong> {errors.name}</small>}
+    <span id="name-help" aria-live="polite">
+      {errors.name && <small class="error"><strong>Error:</strong> {errors.name}</small>}
+    </span>
     <label for="email">
       Email
-      <FormField el="input" type="email" name="email" id="email" aria-describedby="email-help" />
+      <FormField el="input" type="email" name="email" id="email" aria-describedby="email-help" required />
     </label>
-    <small class="help" id="email-help">Email is required, and should be formatted as an email.</small>
-    {errors.email && <small class="error" id="email-help"><strong>Error:</strong> {errors.email}</small>}
+    <span id="email-help" aria-live="polite">
+      {errors.email && <small class="error"><strong>Error:</strong> {errors.email}</small>}
+    </span>
     <label for="message">
       Message
-      <FormField el="textarea" name="message" id="message" rows="10" aria-describedby="message-help" />
+      <FormField el="textarea" name="message" id="message" rows="10" aria-describedby="message-help" required minlength="2" />
     </label>
-    <small class="help" id="message-help">Message is required.</small>
-    {errors.message && <small class="error" id="name-help"><strong>Error:</strong> {errors.message}</small>}
+    <span id="message-help" aria-live="polite">
+      {errors.message && <small class="error"><strong>Error:</strong> {errors.message}</small>}
+    </span>
     <input type="hidden" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
     <button type="submit">Send</button>
   </form>
@@ -99,7 +102,7 @@ if (Astro.request.method === "POST") {
       opacity: 0.95;
       margin-top: 0.5rem;
 
-      &.error {
+      & :global(.error) {
         padding: 0.25rem 0.5rem;
         background-color: var(--red-bg);
         color: var(--text-on-red);
@@ -118,7 +121,51 @@ if (Astro.request.method === "POST") {
 </style>
 
 <script>
+  import suite from "@/utils/suite";
+  
   document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("contact");
-  })
+    const nameField = document.getElementById("name");
+    const emailField = document.getElementById("email");
+    const messageField = document.getElementById("message");
+
+    const nameError = document.getElementById("name-help");
+    const emailError = document.getElementById("email-help");
+    const messageError = document.getElementById("message-help");
+
+    nameField?.addEventListener("input", () => {
+      // @ts-ignore
+      let name = { name: nameField.value };
+      let result = suite(name);
+      if (result.isValid("name")) {
+        nameError!.innerHTML = "";
+      }
+      else if (result.hasErrors("name")) {
+        nameError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("name")[0]}</small>`;
+      }
+    });
+
+    emailField?.addEventListener("input", () => {
+      // @ts-ignore
+      let email = { email: emailField.value };
+      let result = suite(email);
+      if (result.isValid("email")) {
+        emailError!.innerHTML = "";
+      }
+      else if (result.hasErrors("email")) {
+        emailError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("email")[0]}</small>`;
+      }
+    });
+
+    messageField?.addEventListener("input", () => {
+      // @ts-ignore
+      let message = { message: messageField.value };
+      let result = suite(message);
+      if (result.isValid("message")) {
+        messageError!.innerHTML = "";
+      }
+      else if (result.hasErrors("message")) {
+        messageError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("message")[0]}</small>`;
+      }
+    });
+  });
 </script>

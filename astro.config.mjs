@@ -8,7 +8,7 @@ export default defineConfig({
     imageService: "passthrough",
     runtime: {
       mode: "local",
-      type: "pages"
+      type: "pages",
     }
   }),
 });

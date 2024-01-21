@@ -15,7 +15,7 @@ const suite = create((data = {}) => {
   });
 
   test("message", "Message must not be blank, and should be more than 2 characters.", () => {
-    enforce(data.message).isNotBlank();
+    enforce(data.message).isNotBlank().longerThan(2);
   });
 
   test("_gotcha", "Something went wrong!", () => {

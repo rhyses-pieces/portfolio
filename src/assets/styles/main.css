@@ -181,11 +181,6 @@ input, textarea {
   border: var(--border) var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-
-  &:invalid {
-    color: #fff;
-    background-color: var(--red);
-  }
 }
 
 [data-theme="dark"] input, textarea {
