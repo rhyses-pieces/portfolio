@@ -16,8 +16,6 @@ if (import.meta.env.PROD) {
   <body>
     <!-- Include the script that builds the page and powers Static CMS -->
     <script is:inline src="https://unpkg.com/@staticcms/app@^4.0.0/dist/static-cms-app.js"></script>
-    <script is:inline>
-      window.CMS.init();
-    </script>
+    <script is:inline>window.CMS.init();</script>
   </body>
 </html>

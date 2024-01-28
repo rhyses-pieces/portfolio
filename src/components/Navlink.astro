@@ -11,13 +11,13 @@ const { index, name, slug } = Astro.props;
 
 const anim: TransitionAnimationPair = {
   old: {
-    name: "slideOut",
+    name: "slide-out",
     duration: "0.4s",
     easing: "ease-out",
     fillMode: "forwards",
   },
   new: {
-    name: "slideIn",
+    name: "slide-in",
     duration: "0.4s",
     delay: `${index * 0.1 + 0.1}s`,
     easing: "ease-in",
@@ -53,7 +53,7 @@ const horizontalSlide: TransitionDirectionalAnimations = {
     }
   }
 
-@keyframes slideIn {
+@keyframes slide-in {
   from {
     transform: translateX(20%);
     opacity: 0;
@@ -64,7 +64,7 @@ const horizontalSlide: TransitionDirectionalAnimations = {
   }
 }
 
-@keyframes slideOut {
+@keyframes slide-out {
   from {
     transform: translateX(0);
     opacity: 1;

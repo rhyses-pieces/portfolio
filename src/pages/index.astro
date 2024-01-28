@@ -2,6 +2,26 @@
 import Base from '@/layouts/Base.astro';
 ---
 <Base title="rhyses pieces">
-  <h1>Hi there!</h1>
-  <p>this is a test</p>
+  <section>
+    <h1>Hi there! <span id="hand-wave" title="hand waving">👋</span></h1>
+    <p>My name is Rhys Kim, and I'm a web developer. This is my portfolio / personal website! You can check out some of my stuff by navigating the nav bar at the top. Enjoy your stay!</p>
+  </section>
 </Base>
+
+<style>
+  section {
+    display: grid;
+    place-content: center;
+    min-height: 80vh;
+
+    & #hand-wave {
+      display: inline-block;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: rotate(25deg);
+        cursor: default;
+      }
+    }
+  }
+</style>

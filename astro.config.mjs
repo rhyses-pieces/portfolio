@@ -1,14 +1,26 @@
 import { defineConfig } from 'astro/config';
-import cloudflare from "@astrojs/cloudflare";
+import icon from "astro-icon";
+import node from "@astrojs/node";
+import a11yEmoji from "@fec/remark-a11y-emoji";
+import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  adapter: cloudflare({
-    imageService: "passthrough",
-    runtime: {
-      mode: "local",
-      type: "pages",
-    }
+  integrations: [icon()],
+  markdown: {
+    remarkPlugins: [a11yEmoji],
+    rehypePlugins: [rehypeExternalLinks],
+  },
+  adapter: node({
+    mode: "standalone"
   }),
+  server: {
+    host: true,
+  },
+  vite: {
+    ssr: {
+      noExternal: ["transition-style"],
+    },
+  },
 });

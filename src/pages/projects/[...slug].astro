@@ -17,10 +17,17 @@ export const getStaticPaths = (async () => {
 const { project } = Astro.props;
 const { Content } = await project.render();
 ---
-<Markdown frontmatter={project.data} transitionName={`project ${project.slug}`}>
-  <Figure transition:name={`project ${project.slug} image`} src={project.data.image.source.src} alt={project.data.image.alt} />
+<Markdown frontmatter={project.data} transitionName={`project-${project.slug}`}>
+  <Figure transition:name={`project-${project.slug}-image`} src={project.data.image.source.src} alt={project.data.image.alt} />
   <header>
-    <h1 transition:name={`project ${project.slug} header`}>{project.data.title}</h1>
+    {project.data.projectUrl ? 
+      <h1 transition:name={`project-${project.slug}-header`}>
+        <a href={project.data.projectUrl} rel="nofollow" title={`External link to ${project.data.title} on ` + (project.data.projectUrl.includes("itch.io") ? "Itch.io" : "GitHub")}>
+          {project.data.title}
+        </a>
+      </h1>
+      : <h1 transition:name={`project-${project.slug}-header`}>{project.data.title}</h1>
+    }
     <a href="/projects">return?</a>
   </header>
   <time datetime={project.data.date.toISOString()}>{project.data.date}</time>
@@ -29,7 +36,6 @@ const { Content } = await project.render();
       <li>{tag}</li>
     ))}
   </ul>
-  <a href={project.data.projectUrl} target="_blank" rel="noopener noreferrer">to project</a>
   <section>
     <Content />
   </section>
@@ -46,6 +52,19 @@ const { Content } = await project.render();
     & h1 { 
       flex-grow: 1; 
       margin-bottom: 0;
+
+      & > a {
+        background: var(--text);
+        color: var(--background);
+        padding: 0.25rem 0.25rem 0;
+        text-decoration: underline wavy var(--text) 3px;
+        text-underline-offset: 0.75rem;
+
+        &:hover {
+          background: transparent;
+          color: var(--text);
+        }
+      }
     }
     /* snippet from https://css-tricks.com/useful-flexbox-technique-alignment-shifting-wrapping/ */
   }
@@ -53,7 +72,7 @@ const { Content } = await project.render();
   time { 
     display: inline-block;
     font-size: 1rem; 
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
 
   .tags {
@@ -72,12 +91,8 @@ const { Content } = await project.render();
     }
   }
 
-  section {
-    padding: 1rem;
-    margin-bottom: 3rem;
+  section { margin-bottom: 5rem; }
 
-
-  }
-
+  :global(figure) {margin: 2rem auto 1rem; }
   :global(.fonts-loaded) .tags { font-family: var(--accent-font); }
 </style>

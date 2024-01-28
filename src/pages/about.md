@@ -6,4 +6,10 @@ title: about
 
 My name is Rhys Kim, and I'm obsessed with making usable experiences for everyone!
 
-![This website is hosted Green - checked by thegreenwebfoundation.org](https://api.thegreenwebfoundation.org/greencheckimage/portfolio-2fx.pages.dev?nocache=true)
+# Credits
+
+Here are some of the resources I used to create this portfolio:
+
+- [Astro](https://astro.build/), to build and generate the website
+- [Sligoil](https://velvetyne.fr/fonts/sligoil/), a libre font made by Ariel Martín Pérez and distributed by velvetyne.fr
+- [Kinsta](https://kinsta.com/), to host the portfolio

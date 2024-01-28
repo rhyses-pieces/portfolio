@@ -3,7 +3,7 @@ title: Portfolio
 draft: true
 date: 2023-12-12T06:13:04.384
 image:
-  source: /src/assets/images/3.png
+  source: /src/assets/images/main_menu.png
   alt: Placeholder image
 projectUrl: https://github.com/rhyses-pieces/portfolio/
 tags:

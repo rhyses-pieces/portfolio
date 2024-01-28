@@ -25,6 +25,7 @@ const verticalSlide: TransitionDirectionalAnimations = {
 <Base title="rhyses pieces | Thank you">
   <section>
     <h1 transition:animate={verticalSlide}>Thank you!</h1>
+    <p transition:animate="fade">You'll be redirected to the <a href="/">home page</a> in <span id="countdown">5 seconds</span>...</p>
   </section>
 </Base>
 
@@ -35,3 +36,18 @@ const verticalSlide: TransitionDirectionalAnimations = {
     height: 80vh;
   }
 </style>
+
+<script>
+  let seconds = 5;
+  const countdown = setInterval(() => {
+    seconds--;
+    if (seconds <= 0) {
+      clearInterval(countdown);
+      window.location.href = "/";
+    } else if (seconds === 1) {
+      document.getElementById("countdown")!.innerHTML = seconds + " second";
+    } else {
+      document.getElementById("countdown")!.innerHTML = seconds + " seconds";
+    }
+  }, 1000);
+</script>
