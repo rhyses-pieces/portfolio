@@ -7,7 +7,7 @@ import rehypeExternalLinks from "rehype-external-links";
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  integrations: [icon()],
+  integrations: [icon({ iconDir: "src/assets/icons", })],
   markdown: {
     remarkPlugins: [a11yEmoji],
     rehypePlugins: [rehypeExternalLinks],
