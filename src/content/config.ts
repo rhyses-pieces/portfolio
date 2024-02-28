@@ -5,7 +5,7 @@ const projectCollection = defineCollection({
   schema: ({ image }) => z.object({
     draft: z.boolean().default(true),
     title: z.string(),
-    date: z.date(),
+    date: z.date({ coerce: true }),
     image: z.object({
       source: image(),
       alt: z.string(),

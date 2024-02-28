@@ -1,4 +1,6 @@
 ---
+import { Image } from "@unpic/astro";
+
 interface Props {
   src: string;
   alt: string;
@@ -8,7 +10,7 @@ interface Props {
 const { src, alt, caption } = Astro.props;
 ---
 <figure>
-  <img loading="lazy" decoding="async" src={src} alt={alt} />
+  <Image src={src} alt={alt} />
   <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
 
@@ -21,14 +23,16 @@ const { src, alt, caption } = Astro.props;
     background-color: #fff;
     border: var(--border) var(--border-color);
     border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
     transition-property: all;
 
-    & figcaption {
+    figcaption {
       text-align: center;
       font-size: 1rem;
       margin-top: 0.25rem;
     }
-    & img { 
+    
+    img { 
       aspect-ratio: 12/7;
       object-fit: cover;
       object-position: top;

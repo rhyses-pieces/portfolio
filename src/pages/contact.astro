@@ -93,21 +93,22 @@ if (Astro.request.method === "POST") {
     margin: 2rem 2rem 5rem;
     padding: 1rem;
     border: var(--border) var(--border-color);
-    border-radius: var(--border-radius);
+    border-radius: var(--container-radius);
+    box-shadow: var(--box-shadow);
   }
 
   form {
     display: flex;
     flex-flow: column;
     
-    & label {
+    label {
       display: flex;
       flex-flow: inherit;
       gap: 0.5rem;
       margin-top: 1rem;
     }
 
-    & [id$="-help"] {
+    [id$="-help"] {
       opacity: 0.95;
       margin-top: 0.5rem;
 
@@ -120,7 +121,7 @@ if (Astro.request.method === "POST") {
       }
     }
 
-    & button {
+    button {
       width: min-content;
       align-self: center;
       font-size: 2rem;

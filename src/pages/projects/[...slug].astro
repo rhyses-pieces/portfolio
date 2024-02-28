@@ -32,7 +32,7 @@ const { Content } = await project.render();
   </header>
   <time datetime={project.data.date.toISOString()}>{project.data.date}</time>
   <ul class="tags">
-    {project.data.tags.map((tag) => (
+    {project.data.tags.map((tag: string) => (
       <li>{tag}</li>
     ))}
   </ul>

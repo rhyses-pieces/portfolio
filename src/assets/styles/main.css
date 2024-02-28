@@ -1,8 +1,13 @@
 @font-face {
-  font-family: "Sligoil";
-  src: url('/fonts/Sligoil-Micro.woff2') format('woff2');
+  font-family: "Terminal";
+  src: url("/fonts/terminal-grotesque_open.woff2") format("woff2");
   font-weight: normal;
-  font-display: swap;
+}
+
+@font-face {
+  font-family: "Terminal";
+  src: url("/fonts/terminal-grotesque.woff2") format("woff2");
+  font-weight: bold;
 }
 
 @font-face {
@@ -37,6 +42,7 @@
   --text-on-secondary: #000;
   --text-on-accent: #000;
   --border-color: #000;
+
   --red: hsl(10 63% 38%);
   --orange: hsl(32 73% 30%);
   --yellow: hsl(47 65% 26%);
@@ -67,6 +73,7 @@
   --text-on-secondary: #fff;
   --text-on-accent: #fff;
   --border-color: #fff;
+
   --red: hsl(3 78% 62%);
   --orange: hsl(28 70% 49%);
   --yellow: hsl(43 68% 42%);
@@ -89,7 +96,7 @@
 
 :root {
   --body-font: "Xenon", 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
-  --heading-font: "Sligoil", Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  --heading-font: "Terminal", Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   --accent-font: "Intel", ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
   --border: 2px solid;
   --box-shadow: 2px 2px 0 var(--border-color);
@@ -114,14 +121,14 @@ h1, h2, h3, h4, h5, h6 {
 
 h5, h6 { font-weight: normal; }
 
-h1 {font-size: 3.053rem; /* 48.8px */}
-h2 {font-size: 2.442rem; /* 39.04px */}
-h3 {font-size: 1.954rem; /* 31.2px */}
-h4 {font-size: 1.563rem; /* 24.96px */}
-h5 {font-size: 1.250rem; /* 20px */}
+h1 {font-size: 3.053em; /* 48.8px */}
+h2 {font-size: 2.442em; /* 39.04px */}
+h3 {font-size: 1.954em; /* 31.2px */}
+h4 {font-size: 1.563em; /* 24.96px */}
+h5 {font-size: 1.250em; /* 20px */}
 small {
   font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-  font-size: 0.800rem; /* 12.8px */
+  font-size: 0.800em; /* 12.8px */
 }
 
 a {
@@ -174,9 +181,9 @@ input, textarea {
 
 /* for font loading optimization */
 .fonts-loaded {
-  & body { font-family: var(--body-font); }
-  & h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); }
-  & button, input, textarea, small { font-family: var(--accent-font); }
+  body { font-family: var(--body-font); }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); }
+  button, input, textarea, small { font-family: var(--accent-font); }
 }
 
 @keyframes slideUp {

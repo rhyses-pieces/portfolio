@@ -11,6 +11,7 @@ My name is Rhys Kim, and I'm obsessed with making usable experiences for everyon
 Here are some of the resources I used to create this portfolio:
 
 - [Astro](https://astro.build/), to build and generate the website
-- [Sligoil](https://velvetyne.fr/fonts/sligoil/), a libre font made by Ariel Martín Pérez and distributed by velvetyne.fr
+- [Terminal Grotesque](https://velvetyne.fr/fonts/terminal-grotesque/) by Raphaël Bastide, with the contribution of Jérémy Landes. Distributed by velvetyne.fr.
 - [Schemist](https://schemist.fglt.fr), to generate all the colors used on this website
+- [Realtime Colors](https://www.realtimecolors.com), to preview a look for the website
 - [Kinsta](https://kinsta.com/), to host the portfolio
