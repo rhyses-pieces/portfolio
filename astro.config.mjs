@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import { imageService } from '@unpic/astro/service';
-import node from "@astrojs/node";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
