@@ -19,7 +19,9 @@ export default defineConfig({
       layout: "constrained"
     })
   },
-  adapter: vercel(),
+  adapter: vercel({
+    imageService: false,
+  }),
   vite: {
     ssr: {
       noExternal: ["transition-style"]
