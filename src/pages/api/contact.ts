@@ -1,3 +1,4 @@
+import { Deta } from "deta";
 import type { APIRoute } from "astro";
 import suite from "@/utils/suite";
 
@@ -13,10 +14,10 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   }
   const validationResult = suite(data);
   if (validationResult.isValid()) {
-    // const deta = Deta();
-    // const db = deta.Base("contact_form");
-    // await db.put({ name: data.name, email: data.email, message: data.message });
-    // suite.reset(); 
+    const deta = Deta();
+    const db = deta.Base("contact_form");
+    await db.put({ name: data.name, email: data.email, message: data.message });
+    suite.reset(); 
     return redirect("/thank-you");
   } else {
     if (validationResult.hasErrors("name")) {
