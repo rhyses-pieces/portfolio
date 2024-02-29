@@ -10,7 +10,7 @@ interface Props {
 const { src, alt, caption } = Astro.props;
 ---
 <figure>
-  <Image src={src} alt={alt} unoptimized />
+  <Image src={src} alt={alt} cdn="vercel" />
   <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
 
