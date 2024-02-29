@@ -1,4 +1,4 @@
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import { imageService } from '@unpic/astro/service';
 import icon from "astro-icon";
 import react from "@astrojs/react";
@@ -14,14 +14,13 @@ export default defineConfig({
     iconDir: "src/assets/icons"
   }), react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],
   image: {
-    service: passthroughImageService(),
-  },
-  adapter: vercel({
-    imageService: true,
-    devImageService: imageService({
+    service: imageService({
       placeholder: "blurhash",
       layout: "constrained"
     }),
+  },
+  adapter: vercel({
+    imageService: false,
   }),
   vite: {
     ssr: {
