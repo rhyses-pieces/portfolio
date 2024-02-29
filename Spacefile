@@ -3,7 +3,7 @@ v: 0
 micros:
   - name: portfolio-draft
     src: .
-    engine: nodejs16
+    engine: nodejs18
     dev: astro dev
     commands:
       - npm run build
