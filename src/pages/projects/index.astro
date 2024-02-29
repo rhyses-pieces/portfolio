@@ -32,6 +32,7 @@ const sortedProjects = projects
         projectUrl={project.data.projectUrl}
         imageUrl={project.data.image.source.src}
         imageAlt={project.data.image.alt}
+        imageCaption={project.data.image.caption}
       />
     ))}
   </section>
@@ -62,7 +63,7 @@ const sortedProjects = projects
         flex-wrap: wrap;
         gap: 0.5rem;
 
-        & > .filter {
+        > .filter {
           white-space: nowrap;
           &::before { content: "#"; }
           &[aria-pressed="true"] { 
@@ -72,7 +73,7 @@ const sortedProjects = projects
         }
       }
 
-      & > #reset-tags { 
+      > #reset-tags { 
         font-size: 1.25rem; 
         font-weight: bold;
         margin-left: auto;

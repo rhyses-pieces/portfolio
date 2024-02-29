@@ -24,7 +24,7 @@ let index: number = 0;
 projects.forEach(() => { index++; });
 ---
 <Base title={`rhyses pieces | tagged: #${tag}`}>
-  <section>
+  <header>
     <h1>#{tag} ({index == 1 ? "1 post" : index + " posts"})</h1>
     <nav aria-label="tag navigation">
       <ul>
@@ -34,52 +34,48 @@ projects.forEach(() => { index++; });
         ))}
       </ul>
     </nav>
-    <div>
-      {projects.map(project => (
-        <Project 
-          transitionName={`project-${project.slug}`}
-          title={project.data.title}
-          slug={`/projects/${project.slug}`}
-          date={project.data.date}
-          tags={project.data.tags}
-          projectUrl={project.data.projectUrl}
-          imageUrl={project.data.image.source.src}
-          imageAlt={project.data.image.alt}
-        />
-      ))}
-    </div>
+  </header>
+
+  <section class="full-bleed">
+    {projects.map(project => (
+      <Project 
+        transitionName={`project-${project.slug}`}
+        title={project.data.title} 
+        slug={`/projects/${project.slug}`}
+        date={project.data.date}
+        tags={project.data.tags}
+        projectUrl={project.data.projectUrl}
+        imageUrl={project.data.image.source.src}
+        imageAlt={project.data.image.alt}
+        imageCaption={project.data.image.caption}
+      />
+    ))}
   </section>
 </Base>
 
 <style>
-  section {
-    grid-column: 1 / -1;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    grid-auto-flow: row;
-    gap: 1.5rem;
+  nav {
+    > ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0;
+      gap: 1rem 2rem;
 
-    & h1 { grid-column: 1 / -1; }
-    & nav {
-      grid-column: 1 / -1;
+      > li {
+        white-space: nowrap;
 
-      & > ul {
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 0;
-        column-gap: 2rem;
-        row-gap: 1rem;
-
-        & > li {
-          white-space: nowrap;
-
-          &::marker { content: "#";}
-        }
+        &::marker { content: "#";}
       }
     }
+  }
+
+  .full-bleed {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    place-content: center;
   }
 </style>

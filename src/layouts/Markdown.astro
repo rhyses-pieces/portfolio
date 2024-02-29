@@ -14,7 +14,7 @@ const { transitionName, frontmatter } = Astro.props;
   </article>
 </Base>
 
-<style>
+<style is:inline>
   article {
     h1 {font-size: 2.489em; /* 39.84px */}
     h2 {font-size: 2.074em; /* 33.12px */}
@@ -22,5 +22,6 @@ const { transitionName, frontmatter } = Astro.props;
     h4 {font-size: 1.440em; /* 23.04px */}
     h5 {font-size: 1.200em; /* 19.2px */}
     small {font-size: 0.833em; /* 13.28px */}
+    p { line-height: 2; }
   }
 </style>

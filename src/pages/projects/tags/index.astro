@@ -1,12 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "@/layouts/Base.astro";
+import Project from "@/components/Project.astro";
 
 const projects = await getCollection("projects");
 const tags = [...new Set(projects.map(project => project.data.tags).flat())];
 ---
 <Base title="rhyses pieces | tags">
-  <section>
+  <header>
     <h1>Filter projects by tags</h1>
     <nav aria-label="tag navigation">
       <ul>
@@ -15,5 +16,48 @@ const tags = [...new Set(projects.map(project => project.data.tags).flat())];
         ))}
       </ul>
     </nav>
+  </header>
+
+  <section class="full-bleed">
+    {projects.map(project => (
+      <Project 
+        transitionName={`project-${project.slug}`}
+        title={project.data.title} 
+        slug={`/projects/${project.slug}`}
+        date={project.data.date}
+        tags={project.data.tags}
+        projectUrl={project.data.projectUrl}
+        imageUrl={project.data.image.source.src}
+        imageAlt={project.data.image.alt}
+        imageCaption={project.data.image.caption}
+      />
+    ))}
   </section>
 </Base>
+
+<style>
+  nav[aria-label="tag navigation"] {
+    > ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0;
+      gap: 1rem 2rem;
+
+      > li {
+        white-space: nowrap;
+
+        &::marker { content: "#";}
+      }
+    }
+  }
+
+  .full-bleed {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    place-content: center;
+  }
+</style>

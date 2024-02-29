@@ -1,51 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
 import FormField from "@/components/FormField.astro";
-import suite from "@/utils/suite";
-
-const errors = { name: "", email: "", message: "" };
-if (Astro.request.method === "POST") {
-  try {
-    const form = await Astro.request.formData();
-    const data = {
-      name: form.get("name")?.toString(),
-      email: form.get("email")?.toString(),
-      message: form.get("message")?.toString(),
-      _gotcha: form.get("_gotcha")?.toString(),
-    }
-    const validationResult = suite(data);
-    
-    if (validationResult.isValid()) {
-      const url = `https://script.google.com/macros/s/${import.meta.env.SHEETS_ID}/exec`;
-
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-      });
-
-      return Astro.redirect("/thank-you", 302);
-    } else {
-      if (validationResult.hasErrors("name")) {
-        errors.name += validationResult.getErrors("name")[0];
-      }
-      
-      if (validationResult.hasErrors("email")) {
-        errors.email += validationResult.getErrors("email")[0];
-      }
-
-      if (validationResult.hasErrors("message")) {
-        errors.message += validationResult.getErrors("message")[0];
-      }
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
 ---
 <Base title="rhyses pieces | contact">
   <h1>Contact me</h1>
@@ -60,27 +15,27 @@ if (Astro.request.method === "POST") {
 
   <section>
     <h2>Send me a message</h2>
-    <form id="contact" method="post" novalidate>
+    <form id="contact" action="/api/contact" method="post" novalidate>
       <label for="name">
         Name
         <FormField el="input" type="text" name="name" id="name" aria-describedby="name-help" required />
       </label>
       <span id="name-help" aria-live="polite">
-        {errors.name && <small class="error"><strong>Error:</strong> {errors.name}</small>}
+        
       </span>
       <label for="email">
         Email
         <FormField el="input" type="email" name="email" id="email" aria-describedby="email-help" required />
       </label>
       <span id="email-help" aria-live="polite">
-        {errors.email && <small class="error"><strong>Error:</strong> {errors.email}</small>}
+        
       </span>
       <label for="message">
         Message
         <FormField el="textarea" name="message" id="message" rows="10" aria-describedby="message-help" required minlength="2" />
       </label>
       <span id="message-help" aria-live="polite">
-        {errors.message && <small class="error"><strong>Error:</strong> {errors.message}</small>}
+        
       </span>
       <input type="hidden" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
       <button type="submit">Send</button>
@@ -112,7 +67,7 @@ if (Astro.request.method === "POST") {
       opacity: 0.95;
       margin-top: 0.5rem;
 
-      & :global(.error) {
+      :global(.error) {
         padding: 0.25rem 0.5rem;
         background-color: var(--red-bg);
         color: var(--text-on-red);
@@ -129,3 +84,53 @@ if (Astro.request.method === "POST") {
     }
   }
 </style>
+
+<script>
+  import suite from "@/utils/suite";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const nameField = document.getElementById("name");
+    const emailField = document.getElementById("email");
+    const messageField = document.getElementById("message");
+
+    const nameError = document.getElementById("name-help");
+    const emailError = document.getElementById("email-help");
+    const messageError = document.getElementById("message-help");
+
+    nameField?.addEventListener("input", () => {
+      // @ts-ignore
+      let name = { name: nameField.value };
+      let result = suite(name);
+      if (result.isValid("name")) {
+        nameError!.innerHTML = "";
+      }
+      else if (result.hasErrors("name")) {
+        nameError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("name")[0]}</small>`;
+      }
+    });
+
+    emailField?.addEventListener("input", () => {
+      // @ts-ignore
+      let email = { email: emailField.value };
+      let result = suite(email);
+      if (result.isValid("email")) {
+        emailError!.innerHTML = "";
+      }
+      else if (result.hasErrors("email")) {
+        emailError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("email")[0]}</small>`;
+      }
+    });
+
+    messageField?.addEventListener("input", () => {
+      // @ts-ignore
+      let message = { message: messageField.value };
+      let result = suite(message);
+      if (result.isValid("message")) {
+        messageError!.innerHTML = "";
+      }
+      else if (result.hasErrors("message")) {
+        messageError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("message")[0]}</small>`;
+      }
+    });
+  });
+</script>

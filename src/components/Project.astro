@@ -13,6 +13,7 @@ interface Props {
   projectUrl: string;
   imageUrl: string;
   imageAlt: string;
+  imageCaption?: string;
 }
 
 const anim: TransitionAnimationPair = {
@@ -35,7 +36,7 @@ const scaleUp: TransitionDirectionalAnimations = {
   backwards: anim,
 }
 
-const { transitionName, title, slug, date, tags, projectUrl, imageUrl, imageAlt } = Astro.props;
+const { transitionName, title, slug, date, tags, projectUrl, imageUrl, imageAlt, imageCaption } = Astro.props;
 ---
 <article transition:name={transitionName} transition:animate={scaleUp} class="project">
   <header>
@@ -44,7 +45,7 @@ const { transitionName, title, slug, date, tags, projectUrl, imageUrl, imageAlt 
       {projectUrl.includes("itch.io") ? <Icon name="itchio" /> : <Icon name="github" />}
     </a>
   </header>
-  <Figure transition:name={`project-${slug}-image`} src={imageUrl} alt={imageAlt} />
+  <Figure transition:name={`project-${slug}-image`} src={imageUrl} alt={imageAlt} caption={imageCaption} />
   <time datetime={date.toISOString()}>
     Posted on 
     {date.toLocaleString("en-us", { month: "long", day: "numeric", year: "numeric", timeZoneName: "short" })}
@@ -146,6 +147,7 @@ const { transitionName, title, slug, date, tags, projectUrl, imageUrl, imageAlt 
     &:nth-of-type(even) { transform: rotate(1.25deg); }
     &:nth-of-type(2n-1) { transform: rotate(-1deg); }
     &:nth-of-type(3n) { transform: rotate(0.75deg); }
+    &:nth-of-type(4n) { transform: none; }
   }
 
   :global([data-theme=dark]) article {

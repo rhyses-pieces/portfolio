@@ -18,7 +18,7 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 ---
 <Markdown frontmatter={project.data} transitionName={`project-${project.slug}`}>
-  <Figure transition:name={`project-${project.slug}-image`} src={project.data.image.source.src} alt={project.data.image.alt} />
+  <Figure transition:name={`project-${project.slug}-image`} src={project.data.image.source.src} alt={project.data.image.alt} caption={project.data.image.caption} />
   <header>
     {project.data.projectUrl ? 
       <h1 transition:name={`project-${project.slug}-header`}>
@@ -30,7 +30,7 @@ const { Content } = await project.render();
     }
     <a href="/projects">return?</a>
   </header>
-  <time datetime={project.data.date.toISOString()}>{project.data.date}</time>
+  <time datetime={project.data.date.toISOString()}>Posted on {project.data.date.toLocaleDateString(undefined, { dateStyle: "full" })}</time>
   <ul class="tags">
     {project.data.tags.map((tag: string) => (
       <li>{tag}</li>
@@ -48,12 +48,12 @@ const { Content } = await project.render();
     flex-wrap: wrap;
     margin: 1rem 0;
 
-    & > a { white-space: nowrap; }
-    & h1 { 
+    > a { white-space: nowrap; }
+    h1 { 
       flex-grow: 1; 
       margin-bottom: 0;
 
-      & > a {
+      > a {
         background: var(--text);
         color: var(--background);
         padding: 0.25rem 0.25rem 0;
@@ -84,7 +84,7 @@ const { Content } = await project.render();
     border-top: var(--border) var(--border-color);
     border-bottom: var(--border) var(--border-color);
 
-    & > li {
+    > li {
       padding: 0.5rem 0.5rem 0.5rem 0.15rem;
 
       &::marker { content: "#"; }
@@ -95,4 +95,11 @@ const { Content } = await project.render();
 
   :global(figure) {margin: 2rem auto 1rem; }
   :global(.fonts-loaded) .tags { font-family: var(--accent-font); }
+  :global(code, kbd, pre) {
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 0 0.25rem;
+    border: var(--border) var(--border-color);
+    border-radius: var(--border-radius);
+  }
 </style>
