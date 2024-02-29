@@ -10,7 +10,7 @@ interface Props {
 const { src, alt, caption } = Astro.props;
 ---
 <figure>
-  <Image src={src} alt={alt} />
+  <Image src={src} alt={alt} unoptimized />
   <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
 
