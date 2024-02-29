@@ -1,4 +1,4 @@
-import { create, test, enforce, only } from "vest";
+import { create, test, enforce } from "vest";
 import "vest/enforce/email";
 
 const suite = create((data = {}) => {

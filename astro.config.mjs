@@ -2,8 +2,6 @@ import { defineConfig } from 'astro/config';
 import { imageService } from '@unpic/astro/service';
 import node from "@astrojs/node";
 import icon from "astro-icon";
-import a11yEmoji from "@fec/remark-a11y-emoji";
-import rehypeExternalLinks from "rehype-external-links";
 
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
@@ -25,10 +23,6 @@ export default defineConfig({
       placeholder: "blurhash",
       layout: "constrained"
     })
-  },
-  markdown: {
-    remarkPlugins: [a11yEmoji],
-    rehypePlugins: [rehypeExternalLinks]
   },
   adapter: node({ mode: "standalone" }),
   server: { host: true },

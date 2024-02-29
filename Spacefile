@@ -3,10 +3,12 @@ v: 0
 micros:
   - name: portfolio-draft
     src: .
-    engine: nodejs18
+    engine: nodejs20
     dev: astro dev
     commands:
       - npm run build
     include: 
       - dist
     run: "node ./dist/server/entry.mjs"
+    public_routes:
+      - "/public/**/*"
