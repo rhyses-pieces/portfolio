@@ -15,7 +15,7 @@ import FormField from "@/components/FormField.astro";
 
   <section>
     <h2>Send me a message</h2>
-    <form id="contact" name="contact" method="post" action="/thank-you" netlify netlify-honeypot novalidate>
+    <form id="contact" name="contact" method="post" action="/thank-you" netlify netlify-honeypot>
       <label for="name">
         Name
         <FormField el="input" type="text" name="name" id="name" aria-describedby="name-help" required />
