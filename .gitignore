@@ -4,6 +4,7 @@ dist/
 .astro/
 .wrangler/
 .vercel/
+.netlify/
 
 # dependencies
 node_modules/
@@ -24,6 +25,3 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
-
-# ignore image assets as those are processed by unpic
-/src/assets/images/**/**/**/*
