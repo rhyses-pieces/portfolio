@@ -5,10 +5,10 @@ micros:
     src: .
     engine: nodejs20
     dev: astro dev
+    public_routes:
+      - "/public/**/*"
     commands:
       - npm run build
     include: 
       - dist
     run: "node ./dist/server/entry.mjs"
-    public_routes:
-      - "/public/**/*"
