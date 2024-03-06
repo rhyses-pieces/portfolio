@@ -2,8 +2,16 @@ import { create, test, enforce } from "vest";
 import "vest/enforce/email";
 
 const suite = create((data = {}) => {
+  test("name", "Name must not be empty.", () => {
+    enforce(data.name).isNotEmpty();
+  });
+
   test("name", "Name must not be blank.", () => {
     enforce(data.name).isNotBlank();
+  });
+
+  test("email", "Email must not be empty.", () => {
+    enforce(data.email).isNotEmpty();
   });
 
   test("email", "Email must not be blank.", () => {
@@ -14,8 +22,12 @@ const suite = create((data = {}) => {
     enforce(data.email).isEmail();
   });
 
+  test("message", "Message must not be empty.", () => {
+    enforce(data.message).isNotEmpty();
+  });
+
   test("message", "Message must not be blank.", () => {
-    enforce(data.message).isNotBlank()
+    enforce(data.message).isNotBlank();
   });
 
   test("message", "Message should be more than 2 characters.", () => {

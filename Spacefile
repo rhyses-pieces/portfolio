@@ -12,3 +12,8 @@ micros:
     run: "node ./dist/server/entry.mjs"
     public_routes:
       - "/public/**/*"
+    presets:
+      env:
+        - name: SKIP_KEYSTATIC
+          description: Skip building CMS
+          default: true

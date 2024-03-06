@@ -17,10 +17,9 @@ export default config({
           validation: { isRequired: true },
         }),
         image: fields.object({
-          source: fields.image({
+          source: fields.url({
             label: "Featured Image",
-            directory: "src/assets/images/projects",
-            publicPath: "../../assets/images/projects/",
+            description: "Image from CDN",
             validation: { isRequired: true },
           }),
           alt: fields.text({ 

@@ -1,6 +1,4 @@
 ---
-import { Image } from "@unpic/astro";
-
 interface Props {
   src: string;
   alt: string;
@@ -10,7 +8,7 @@ interface Props {
 const { src, alt, caption } = Astro.props;
 ---
 <figure>
-  <Image src={src} alt={alt} unoptimized />
+  <img src={src} alt={alt} />
   <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
 
