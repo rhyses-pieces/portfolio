@@ -12,7 +12,7 @@ export default defineConfig({
   output: "hybrid",
   integrations: [icon({
     iconDir: "src/assets/icons"
-  }), react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],
+  }), react(), markdoc(), ...(process.env.NODE_ENV === "production" ? [] : [keystatic()])],
   image: {
     service: imageService({
       placeholder: "blurhash",
