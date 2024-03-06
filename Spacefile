@@ -16,4 +16,4 @@ micros:
       env:
         - name: SKIP_KEYSTATIC
           description: Skip building CMS
-          default: true
+          default: "true"
