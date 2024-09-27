@@ -19,7 +19,8 @@ export default config({
         image: fields.object({
           source: fields.url({
             label: "Featured Image",
-            description: "Image from CDN",
+            directory: "src/assets/images/projects",
+            publicPath: "~/images/projects/",
             validation: { isRequired: true },
           }),
           alt: fields.text({ 
