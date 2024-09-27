@@ -12,12 +12,6 @@ export default defineConfig({
   integrations: [icon({
     iconDir: "src/assets/icons"
   }), react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],
-  image: {
-    service: imageService({
-      placeholder: "blurhash",
-      layout: "constrained"
-    })
-  },
   vite: {
     ssr: {
       noExternal: ["transition-style"]
