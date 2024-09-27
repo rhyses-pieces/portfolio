@@ -1,51 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
 import FormField from "@/components/FormField.astro";
-
-import suite from "@/utils/suite";
-
-document.addEventListener("DOMContentLoaded", () => {
-  const nameField = document.getElementById("name");
-  const emailField = document.getElementById("email");
-  const messageField = document.getElementById("message");
-
-  const nameError = document.getElementById("name-help");
-  const emailError = document.getElementById("email-help");
-  const messageError = document.getElementById("message-help");
-
-  nameField?.addEventListener("input", () => {
-    // @ts-ignore
-    let name = { name: nameField.value };
-    let result = suite(name);
-    if (result.isValid("name")) {
-      nameError!.innerHTML = "";
-    } else if (result.hasErrors("name")) {
-      nameError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("name")[0]}</small>`;
-    }
-  });
-
-  emailField?.addEventListener("input", () => {
-    // @ts-ignore
-    let email = { email: emailField.value };
-    let result = suite(email);
-    if (result.isValid("email")) {
-      emailError!.innerHTML = "";
-    } else if (result.hasErrors("email")) {
-      emailError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("email")[0]}</small>`;
-    }
-  });
-
-  messageField?.addEventListener("input", () => {
-    // @ts-ignore
-    let message = { message: messageField.value };
-    let result = suite(message);
-    if (result.isValid("message")) {
-      messageError!.innerHTML = "";
-    } else if (result.hasErrors("message")) {
-      messageError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("message")[0]}</small>`;
-    }
-  });
-});
 ---
 <Base title="rhyses pieces | contact">
   <h1>Contact me</h1>
@@ -129,3 +84,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 </style>
+
+<script>
+import suite from "@/utils/suite";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const nameField = document.getElementById("name");
+  const emailField = document.getElementById("email");
+  const messageField = document.getElementById("message");
+
+  const nameError = document.getElementById("name-help");
+  const emailError = document.getElementById("email-help");
+  const messageError = document.getElementById("message-help");
+
+  nameField?.addEventListener("input", () => {
+    // @ts-ignore
+    let name = { name: nameField.value };
+    let result = suite(name);
+    if (result.isValid("name")) {
+      nameError!.innerHTML = "";
+    } else if (result.hasErrors("name")) {
+      nameError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("name")[0]}</small>`;
+    }
+  });
+
+  emailField?.addEventListener("input", () => {
+    // @ts-ignore
+    let email = { email: emailField.value };
+    let result = suite(email);
+    if (result.isValid("email")) {
+      emailError!.innerHTML = "";
+    } else if (result.hasErrors("email")) {
+      emailError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("email")[0]}</small>`;
+    }
+  });
+
+  messageField?.addEventListener("input", () => {
+    // @ts-ignore
+    let message = { message: messageField.value };
+    let result = suite(message);
+    if (result.isValid("message")) {
+      messageError!.innerHTML = "";
+    } else if (result.hasErrors("message")) {
+      messageError!.innerHTML = `<small class="error"><strong>Error:</strong> ${result.getErrors("message")[0]}</small>`;
+    }
+  });
+});
+</script>
