@@ -1,3 +1,3 @@
 # Portfolio
 
-Built with Astro, SveltiaCMS, and PostCSS.
+Built with Astro, Keystatic, and PostCSS.
