@@ -20,7 +20,7 @@ export default config({
           source: fields.image({
             label: "Featured Image",
             directory: "src/assets/images/projects",
-            publicPath: "../../assets/images/projects/",
+            publicPath: "~/assets/images/projects/",
             validation: { isRequired: true },
           }),
           alt: fields.text({ 
