@@ -7,11 +7,11 @@ import type { TransitionAnimationPair, TransitionDirectionalAnimations } from "a
 interface Props {
   transitionName: string;
   title: string;
-  slug: string;
+  id: string;
   date: Date;
   tags: string[];
   projectUrl: string;
-  imageUrl: string;
+  imageUrl: string | any;
   imageAlt: string;
   imageCaption?: string;
 }
@@ -36,16 +36,16 @@ const scaleUp: TransitionDirectionalAnimations = {
   backwards: anim,
 }
 
-const { transitionName, title, slug, date, tags, projectUrl, imageUrl, imageAlt, imageCaption } = Astro.props;
+const { transitionName, title, id, date, tags, projectUrl, imageUrl, imageAlt, imageCaption } = Astro.props;
 ---
 <article transition:name={transitionName} transition:animate={scaleUp} class="project">
   <header>
-    <h1 transition:name={`project-${slug}-header`}><a href={slug}>{title}</a></h1>
+    <h1 transition:name={`project-${id}-header`}><a href={id}>{title}</a></h1>
     <a class="link" href={projectUrl} title={title} rel="nofollow">
       {projectUrl.includes("itch.io") ? <Icon name="itchio" /> : <Icon name="github" />}
     </a>
   </header>
-  <Figure transition:name={`project-${slug}-image`} src={imageUrl} alt={imageAlt} caption={imageCaption} />
+  <Figure transition:name={`project-${id}-image`} src={imageUrl} alt={imageAlt} caption={imageCaption} />
   <time datetime={date.toISOString()}>
     Posted on 
     {date.toLocaleString("en-us", { month: "long", day: "numeric", year: "numeric", timeZoneName: "short" })}

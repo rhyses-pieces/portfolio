@@ -8,7 +8,6 @@ import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
   integrations: [icon({
     iconDir: "src/assets/icons"
   }), react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],

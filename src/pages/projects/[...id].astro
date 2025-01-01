@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Markdown from "@/layouts/Markdown.astro";
 import Figure from "@/components/Figure.astro";
 
@@ -10,23 +10,23 @@ interface Props { project: CollectionEntry<"projects">; }
 export const getStaticPaths = (async () => {
   const projects = await getCollection("projects");
   return projects.map(project => ({
-    params: { slug: project.slug }, props: { project }
+    params: { id: project.id }, props: { project }
   }));
 }) satisfies GetStaticPaths;
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content } = await render(project);
 ---
-<Markdown frontmatter={project.data} transitionName={`project-${project.slug}`}>
-  <Figure transition:name={`project-${project.slug}-image`} src={project.data.image.source} alt={project.data.image.alt} caption={project.data.image.caption} />
+<Markdown frontmatter={project.data} transitionName={`project-${project.id}`}>
+  <Figure transition:name={`project-${project.id}-image`} src={project.data.image.source} alt={project.data.image.alt} caption={project.data.image.caption} />
   <header>
     {project.data.projectUrl ? 
-      <h1 transition:name={`project-${project.slug}-header`}>
+      <h1 transition:name={`project-${project.id}-header`}>
         <a href={project.data.projectUrl} rel="nofollow" title={`External link to ${project.data.title} on ` + (project.data.projectUrl.includes("itch.io") ? "Itch.io" : "GitHub")}>
           {project.data.title}
         </a>
       </h1>
-      : <h1 transition:name={`project-${project.slug}-header`}>{project.data.title}</h1>
+      : <h1 transition:name={`project-${project.id}-header`}>{project.data.title}</h1>
     }
     <a href="/projects">return?</a>
   </header>

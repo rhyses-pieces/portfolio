@@ -25,9 +25,9 @@ const sortedProjects = projects
     <div class="container">
       {sortedProjects?.map(project => (
         <Project 
-          transitionName={`project-${project.slug}`}
+          transitionName={`project-${project.id}`}
           title={project.data.title} 
-          slug={`/projects/${project.slug}`}
+          id={`/projects/${project.id}`}
           date={project.data.date}
           tags={project.data.tags}
           projectUrl={project.data.projectUrl}
