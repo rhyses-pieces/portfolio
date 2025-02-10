@@ -4,4 +4,4 @@ module.exports = {
   plugins: [
     postcssPresetEnv({ minimumVendorImplementations: 2 })
   ]
-}
+};

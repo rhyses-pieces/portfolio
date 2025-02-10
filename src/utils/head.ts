@@ -7,7 +7,7 @@ const loadFonts = (document: Document) => {
   if ("fonts" in document) {
     Promise.all([
       document.fonts.load("1rem Xenon"),
-      document.fonts.load("700 1rem Galmuri"),
+      document.fonts.load("1rem Terminal"),
       document.fonts.load("1rem Intel"),
     ]).then(function() {
       document.documentElement.classList.add("fonts-loaded");

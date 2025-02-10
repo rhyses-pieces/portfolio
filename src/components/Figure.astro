@@ -30,14 +30,16 @@ const { src, alt, caption, attrs } = Astro.props;
     figcaption {
       text-align: center;
       font-size: 1rem;
-      margin-top: 0.25rem;
+      margin-top: calc(1lh - 2px);
+      height: 1.75lh;
+      text-overflow: ellipsis;
     }
     
     img { 
-      aspect-ratio: 12/7;
+      aspect-ratio: 12 / 7;
       object-fit: cover;
       object-position: top;
-      max-width: 100%;
+      width: 100%;
       height: auto;
       border: var(--border) var(--border-color);
     }

@@ -20,7 +20,7 @@ export default config({
           source: fields.image({
             label: "Featured Image",
             directory: "src/assets/images/projects",
-            publicPath: "~/assets/images/projects/",
+            publicPath: "~/images/projects/",
             validation: { isRequired: true },
           }),
           alt: fields.text({ 
@@ -33,11 +33,10 @@ export default config({
             multiline: true,
           }),
         }),
-        content: fields.document({
+        content: fields.mdoc({
           label: "Content",
-          formatting: true,
           dividers: true,
-          links: true,
+          link: true,
         }),
         projectUrl: fields.url({
           label: "Project URL",

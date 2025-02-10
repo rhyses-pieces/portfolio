@@ -23,7 +23,7 @@ const tags = [...new Set(projects.map(project => project.data.tags).flat())];
       <Project 
         transitionName={`project-${project.slug}`}
         title={project.data.title} 
-        slug={`/projects/${project.slug}`}
+        id={`/projects/${project.id}`}
         date={project.data.date}
         tags={project.data.tags}
         projectUrl={project.data.projectUrl}
