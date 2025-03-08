@@ -61,20 +61,18 @@ const { title } = Astro.props;
 
   main {
     display: grid;
-    grid-template-columns: 1fr min(65ch, 100%) 1fr;
+    grid-template-columns: 1fr min(75ch, 100%) 1fr;
     justify-content: center;
     gap: 1lh;
-    padding: 1rem;
+    padding: 2rem 1rem;
 
     & > * { grid-column: 2; }
     
     & > :not(h1, h2, h3, h4, h5, h6, button, input, textarea) {
       font-size: clamp(1rem, 0.8438rem + 0.5vw, 1.125rem);
-
-      @supports (font-feature-settings: "calt") and (font-stretch: 110%) {
-        font-feature-settings: "calt";
-        font-stretch: 110%;
-      }
+      
+      @supports (font-feature-settings: "calt") { font-feature-settings: "calt" 1; }
+      @supports (font-stretch: 110%) { font-stretch: 110%; }
     }
     p { line-height: 1.75; }
     & > ul:not(.tag) {
