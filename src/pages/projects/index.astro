@@ -78,7 +78,7 @@ const sortedProjects = projects
 
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(400px, calc(100lvw - 2rem)), 1fr));
       place-content: center;
       gap: 2rem;
       padding-inline: clamp(0.5rem, 1rem, 2rem);

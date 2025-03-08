@@ -10,4 +10,11 @@ export default defineConfig({
   integrations: [icon({
     iconDir: "src/assets/icons"
   }), react(), markdoc(), ...(process.env.NODE_ENV == "development" ? [keystatic()] : [])],
+  vite: {
+    server: {
+      allowedHosts: [
+        "8f0c-2600-4040-101d-a500-5cd0-365f-336e-2493.ngrok-free.app",
+      ]
+    }
+  }
 });
