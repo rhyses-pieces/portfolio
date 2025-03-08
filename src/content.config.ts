@@ -18,10 +18,9 @@ const projectCollection = defineCollection({
 });
 
 const testimonyCollection = defineCollection({
-  loader: glob({ pattern: '**\/[^_]*.mdoc', base: "./src/content/testimonies" }),
+  loader: glob({ pattern: '**\/[^_]*.md', base: "./src/content/testimonies" }),
   schema: z.object({
     name: z.string(),
-    content: z.string(),
     projectUrl: z.string().url().optional(),
   }),
 });

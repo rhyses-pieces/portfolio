@@ -30,7 +30,9 @@ const verticalSlide: TransitionDirectionalAnimations = {
 };
 ---
 
-<li transition:animate={verticalSlide}><a href="/projects/tags/{tag}" class="tag">{tag}</a></li>
+<li transition:animate={verticalSlide}>
+  <a href={`/projects/tags/${tag}`} class="tag">{tag}</a>
+</li>
 
 <style>
   .tag {
@@ -71,10 +73,10 @@ const verticalSlide: TransitionDirectionalAnimations = {
   document.addEventListener("astro:page-load", () => {
     const colors = ["red", "orange", "yellow", "green", "blue", "indigo"];
     const randomColor = (array: string[]) => { return array[Math.floor(Math.random() * array.length)] };
-    document.querySelectorAll(".tag").forEach(tag => {
+    document.querySelectorAll<HTMLElement>(".tag").forEach(tag => {
       let color = randomColor(colors);
-      (tag as HTMLElement).style.backgroundColor = `var(--${color}-bg)`;
-      (tag as HTMLElement).style.color = `var(--text-on-${color})`;
+      tag.style.backgroundColor = `var(--${color}-bg)`;
+      tag.style.color = `var(--text-on-${color})`;
     });
   });
 </script>

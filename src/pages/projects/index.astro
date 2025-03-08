@@ -10,18 +10,18 @@ const sortedProjects = projects
   .sort((a, b) => { return b.data.date.getTime() - a.data.date.getTime(); });
 ---
 <Base title="rhyses pieces | projects">
+  <h1>Projects</h1>
+  <aside aria-label="filter by tag">
+    Tags list: 
+    <div>
+      {tags.map(tag => (
+        <button type="button" class="filter" aria-pressed="false" value={tag}>{tag}</button>
+      ))}
+    </div>
+    {(tags.length === 5) ? (<a href="/projects/tags">See more tags?</a>) : null}
+    <button id="reset-tags">Reset</button>
+  </aside>
   <section>
-    <h1>Projects</h1>
-    <aside aria-label="filter by tag">
-      Tags list: 
-      <div>
-        {tags.map(tag => (
-          <button type="button" class="filter" aria-pressed="false">{tag}</button>
-        ))}
-      </div>
-      {(tags.length === 5) ? (<a href="/projects/tags">See more tags?</a>) : null}
-      <button id="reset-tags">Reset</button>
-    </aside>
     <div class="container">
       {sortedProjects?.map(project => (
         <Project 
@@ -41,80 +41,81 @@ const sortedProjects = projects
 </Base>
 
 <style>
-  section {
-    grid-column: 1 / -1;
-    max-width: 1000px;
-    margin: 0 auto;
+  [aria-label="filter by tag"] {
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
 
-    [aria-label="filter by tag"] { 
-      grid-column: 1 / -1;
-      display: flex;
-      flex-flow: row wrap;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1rem;
+    div {
+      flex: 1 1 500px;
+      display: inline-flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
 
-      div {
-        flex: 1 1 500px;
-        display: inline-flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-
-        > .filter {
-          white-space: nowrap;
-          &::before { content: "#"; }
-          &[aria-pressed="true"] { 
-            color: var(--text-on-secondary);
-            background-color: var(--secondary);
-          }
+      > .filter {
+        white-space: nowrap;
+        &::before { content: "#"; }
+        &[aria-pressed="true"] { 
+          color: var(--text-on-secondary);
+          background-color: var(--secondary);
         }
       }
-
-      > #reset-tags { 
-        font-size: 1.25rem; 
-        font-weight: bold;
-        margin-left: auto;
-      }
     }
+
+    > #reset-tags { 
+      font-size: 1.25rem; 
+      font-weight: bold;
+      margin-left: auto;
+    }
+  }
+
+  section {
+    grid-column: 1 / -1;
+    display: grid;
 
     .container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      gap: 1.5rem;
+      place-content: center;
+      gap: 2rem;
+      padding-inline: clamp(0.5rem, 1rem, 2rem);
     }
   }
 </style>
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const projects = document.querySelectorAll(".project");
-    const tagButtons = document.querySelectorAll(".filter");
-    tagButtons.forEach(button => {
+    const projects = Array.from(document.querySelectorAll(".project"));
+    const tagButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(".filter"));
+    const tags = Array.from(document.querySelectorAll(".tag"));
+
+    tagButtons.map(button => {
       button.addEventListener("click", event => {
-        const target = (event.target as HTMLElement);
-        let pressed: boolean = JSON.parse(target.getAttribute("aria-pressed")!);
-        target.setAttribute("aria-pressed", String(!pressed));
-        projects.forEach(element => {
-          let match = Array.from(element.querySelectorAll(".tag"));
-          if (match.some(tag => tag.innerHTML === target.innerHTML)) {
-            match.filter(tagElement => {
-              if (tagElement.innerHTML === target.innerHTML) { (tagElement as HTMLElement).classList.toggle("active"); }
-            });
-            (element as HTMLElement).classList.toggle("show");
-          } else {
-            (pressed) ? (element as HTMLElement).classList.remove("hide") : (element as HTMLElement).classList.add("hide");
-          }
-        });
+        const target = event.target as HTMLButtonElement;
+        tagButtons.map(button => button.ariaPressed = "false");
+        target.ariaPressed = "true";
+        filter(target.value);
       });
     });
 
+    function filter(target: string) {
+      tags.map(tag => tag.classList.remove("active"));
+      tags.filter(tag => tag.textContent == target).map(tag => tag.classList.add("active"));
+      let search = projects.filter(project => {
+        let projectTags = project.querySelectorAll(".tag")
+        return projectTags.values().find(tag => tag.innerHTML == target);
+      });
+      projects.map(project => project.className = "hide");
+      search.map(match => match.className = "show");
+    }
+
     document.getElementById("reset-tags")?.addEventListener("click", () => {
-      projects.forEach(element => element.classList.remove("hide", "show"));
-      document.querySelectorAll(".filter").forEach(element => element.setAttribute("aria-pressed", "false"));
-      document.querySelectorAll(".tag").forEach(element => element.classList.remove("active"));
+      projects.map(element => element.classList.remove("hide", "show"));
+      tagButtons.map(element => element.ariaPressed = "false");
+      tags.map(element => element.classList.remove("active"));
     });
   });
 </script>

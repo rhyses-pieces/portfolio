@@ -11,7 +11,7 @@ interface Props {
   date: Date;
   tags: string[];
   projectUrl: string;
-  imageUrl: string | any;
+  imageUrl: string | ImageMetadata;
   imageAlt: string;
   imageCaption?: string;
 }
@@ -41,7 +41,8 @@ const { transitionName, title, id, date, tags, projectUrl, imageUrl, imageAlt, i
 <article transition:name={transitionName} transition:animate={scaleUp} class="project">
   <header>
     <h1 transition:name={`project-${id}-header`}><a href={id}>{title}</a></h1>
-    <a class="link" href={projectUrl} title={title} rel="nofollow">
+    <a class="link" href={projectUrl} rel="nofollow">
+      <span class="sr-only">Project link leading out to {projectUrl.includes("itch.io") ? "Itch.io" : "GitHub"}</span>
       {projectUrl.includes("itch.io") ? <Icon name="itchio" /> : <Icon name="github" />}
     </a>
   </header>
@@ -58,6 +59,8 @@ const { transitionName, title, id, date, tags, projectUrl, imageUrl, imageAlt, i
 </article>
 
 <style>
+  [data-icon] { aspect-ratio: 1; }
+
   article {
     padding: 1.5rem;
     color: var(--text-on-secondary);
@@ -141,7 +144,7 @@ const { transitionName, title, id, date, tags, projectUrl, imageUrl, imageAlt, i
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
     &:nth-of-type(even) { transform: rotate(1.25deg); }
@@ -193,9 +196,9 @@ const { transitionName, title, id, date, tags, projectUrl, imageUrl, imageAlt, i
 <script>
   document.addEventListener("astro:page-load", () => {
     const colors = ["red", "orange", "yellow", "green", "blue", "indigo"];
-    const randomColor = (array: string[]) => { return array[Math.floor(Math.random() * array.length)] };
-    document.querySelectorAll("article > header > h1 a").forEach(element => {
-      (element as HTMLElement).style.textDecorationColor = `var(--${randomColor(colors)})`;
+    const randomColor = (array: string[]) => array[Math.floor(Math.random() * array.length)];
+    document.querySelectorAll<HTMLElement>("article > header > h1 a").forEach(element => {
+      element.style.textDecorationColor = `var(--${randomColor(colors)})`;
     });
   });
 </script>

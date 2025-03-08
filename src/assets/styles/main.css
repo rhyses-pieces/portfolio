@@ -1,3 +1,4 @@
+@import "reset.css";
 @import "fonts.css";
 @import "colors.css";
 
@@ -11,10 +12,17 @@
   --container-radius: 8px;
 }
 
-html { font-size: 100%; }
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+}
 
 body {
-  font-family: 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+  width: 100vw;
+  min-height: 100vh;
+  font-family: var(--body-font);
+  letter-spacing: 0.0175em;
   color: var(--text);
   background: var(--background);
   transition: background 0.5s ease;
@@ -23,7 +31,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
   font-weight: bold;
-  margin-bottom: 1rem;
 }
 
 h5, h6 { font-weight: normal; }
@@ -38,7 +45,7 @@ small {
   font-size: 0.800em; /* 12.8px */
 }
 
-a {
+a, .link {
   color: var(--text);
   text-decoration: underline solid var(--text) 2px;
   transition: all 0.2s ease-in;
@@ -51,7 +58,7 @@ a {
   }
 }
 
-button {
+button:not(.link), .button {
   cursor: pointer;
   color: var(--text-on-primary);
   background: var(--primary);
@@ -84,14 +91,69 @@ input, textarea {
   border: var(--border) var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+
+  &:disabled {
+    --disabled-border-color: color-mix(in oklab, var(--border-color) 50%, var(--secondary) 50%);
+    cursor: not-allowed;
+    background-color: var(--background);
+    border-color: var(--disabled-border-color);
+    color: var(--disabled-border-color);
+    box-shadow: none;
+  }
 }
 
-/* for font loading optimization */
-.fonts-loaded {
-  body { font-family: var(--body-font); }
-  h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); }
-  button, input, textarea, small { font-family: var(--accent-font); }
+label:has(input[type="checkbox"], input[type="radio"]) {
+  display: grid !important;
+  grid-template-columns: 1.5em auto;
+  align-items: center;
+  font-size: 1rem;
+  gap: 1em !important;
+  
+  input[type="checkbox"] {
+    cursor: pointer;
+    appearance: none;
+    margin: 0;
+    transform: translateY(-2px);
+    font: inherit;
+    color: currentColor;
+    width: 1.65em;
+    height: 1.65em;
+    display: grid;
+    place-content: center;
+
+    &::before {
+      --control-color: var(--primary);
+      content: "";
+      width: 1.15em;
+      height: 1.15em;
+      transform: scale(0);
+      box-shadow: inset 1em 1em var(--control-color);
+      background-color: CanvasText;
+      clip-path: polygon(10% 45%, 0 60%, 50% 100%, 100% 10%, 85% 0, 45% 70%);
+    }
+
+    &:checked::before { transform: scale(1); }
+    &:disabled::before { --control-color: var(--disabled-border-color); }
+  }
 }
+
+/* screen-reader css */
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+/* for font switching */
+.verdana body { font-family: var(--verdana-font); }
+.arial body { font-family: var(--arial-font); }
+.aphont body { font-family: var(--aphont-font); }
+.monospace body { font-family: var(--accent-font); }
 
 @keyframes slideUp {
   from {

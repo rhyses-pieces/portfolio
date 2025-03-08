@@ -2,7 +2,7 @@
 import Base from '@/layouts/Base.astro';
 ---
 <Base title="rhyses pieces">
-  <section>
+  <section id="intro">
     <h1>Hi there! <span id="hand-wave" title="hand waving">👋</span></h1>
     <p>My name is Rhys Kim, and I'm a web developer who likes to make games. This is my portfolio / personal website! You can check out some of my stuff by navigating the nav bar at the top.</p>
     <p>Enjoy your stay!</p>
@@ -10,10 +10,14 @@ import Base from '@/layouts/Base.astro';
 </Base>
 
 <style>
-  section {
+  section:only-child {
+    min-height: calc(90vh - 2rem + 2px);
+  }
+
+  #intro {
     display: grid;
     place-content: center;
-    min-height: 80vh;
+    gap: 1lh;
 
     #hand-wave {
       display: inline-block;

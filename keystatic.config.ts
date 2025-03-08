@@ -33,10 +33,12 @@ export default config({
             multiline: true,
           }),
         }),
-        content: fields.mdoc({
+        content: fields.markdoc({
           label: "Content",
-          dividers: true,
-          link: true,
+          options: {
+            divider: true,
+            link: true,
+          }
         }),
         projectUrl: fields.url({
           label: "Project URL",

@@ -12,7 +12,26 @@ import Base from "@/layouts/Base.astro";
 
   <p>... or you can: </p>
 
+<<<<<<< HEAD
   <section>
+=======
+  <section id="form">
+    <h2>Directly email me</h2>
+    <p>You can click below to reveal my e-mail address. A prompt will pop up and ask you for a password. The password is <strong id="password">ELYSIUM</strong> but in all lowercase.</p>
+    <altcha-widget 
+      obfuscated="iLusgai66UhrpeRVuniHB0fNb7I2eefbrmiq+5LHCcqf6CXihm1DH40Z0rwI2BBaYBB/YrrX6tmmfUnE0hbAswbN1Kk=?key=(prompt:Enter password)"
+      floating="bottom"
+      name="emailObfuscation"
+      class="spoiler"
+      debug
+      test={import.meta.env.DEV ? true : undefined}
+    >
+      <button class="link">Click to reveal</button>
+    </altcha-widget>
+
+    <Separator />
+
+>>>>>>> 28bc59f (fixed commits and refactor scripts/styles)
     <h2>Send me a message</h2>
     <form id="contact" name="contact" method="post" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
       <label for="name">
@@ -43,8 +62,46 @@ import Base from "@/layouts/Base.astro";
 </Base>
 
 <style>
+<<<<<<< HEAD
   section {
     margin: 2rem 2rem 5rem;
+=======
+  :root {
+    --altcha-border-width: 2px;
+    --altcha-color-border: var(--border-color);
+    --altcha-color-base: var(--background);
+    --altcha-color-text: var(--text);
+    --altcha-color-error-text: var(--red);
+    --altcha-color-footer-bg: var(--secondary);
+  }
+
+  .link {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+
+  .spoiler {
+    display: grid;
+    place-content: center;
+    margin-top: 1rem;
+
+    &:has([data-state="verifying"]) * {
+      transition: none;
+      background-color: var(--text);
+      border: none;
+    }
+  }
+
+  #password {
+    font-family: var(--accent-font);
+    letter-spacing: 0.0175em;
+    color: color-mix(in oklab, var(--text) 70%, var(--background));
+  }
+
+  #form {
+    margin: 0 2rem 5rem;
+>>>>>>> 28bc59f (fixed commits and refactor scripts/styles)
     padding: 1rem;
     border: var(--border) var(--border-color);
     border-radius: var(--container-radius);

@@ -18,7 +18,16 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 ---
 <Markdown frontmatter={project.data} transitionName={`project-${project.id}`}>
+<<<<<<< HEAD
   <Figure transition:name={`project-${project.id}-image`} src={project.data.image.source} alt={project.data.image.alt} caption={project.data.image.caption} />
+=======
+  <Figure 
+    transition:name={`project-${project.id}-image`}
+    src={project.data.image.source} 
+    alt={project.data.image.alt} 
+    caption={project.data.image.caption}
+  />
+>>>>>>> 28bc59f (fixed commits and refactor scripts/styles)
   <header>
     {project.data.projectUrl ? 
       <h1 transition:name={`project-${project.id}-header`}>
