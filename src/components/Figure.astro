@@ -5,13 +5,12 @@ interface Props {
   src: string | ImageMetadata;
   alt: string;
   caption?: string;
-  attrs?: any;
 };
 
-const { src, alt, caption, attrs } = Astro.props;
+const { src, alt, caption } = Astro.props;
 ---
 <figure>
-  <Image src={src} alt={alt} {...attrs} />
+  <Image src={src} alt={alt} />
   <figcaption>{caption ? caption : alt}</figcaption>
 </figure>
 

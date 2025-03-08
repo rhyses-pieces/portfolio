@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 150" role="separator" aria-disabled="true">
+  <path fill="none" stroke-width="32" d="m14 133.998 113.678-81.306 46.93 52.398L288 15" style="stroke: var(--primary);" />
+</svg>
+
+<style>
+  :root {
+    --separator: color-mix(in oklab, var(--primary) 50%, var(--background));
+  }
+
+  [role="separator"] {
+    --primary: var(--separator);
+    display: block;
+    max-height: 5em;
+    margin: 1.5em auto;
+    rotate: 8deg;
+
+    /* https://www.sarasoueidan.com/blog/horizontal-rules/ */
+    @media screen and (-ms-high-contrast: active) {
+      --primary: windowText;
+    }
+
+    @media screen and (forced-colors: active) {
+      --primary: CanvasText;
+    }
+  }
+</style>

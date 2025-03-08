@@ -33,10 +33,6 @@ const suite = create((data = {}) => {
   test("message", "Message should be more than 2 characters.", () => {
     enforce(data.message).longerThan(2);
   });
-
-  test("bot-field", "Something went wrong!", () => {
-    enforce(data["bot-field"]).isEmpty();
-  });
 });
 
 export default suite;
