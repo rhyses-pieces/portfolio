@@ -1,16 +1,39 @@
 ---
 import Base from "@/layouts/Base.astro";
 import Separator from "@/components/Separator.astro";
+import { Icon } from "astro-icon/components";
 ---
 <Base title="rhyses pieces | contact">
   <h1>Contact me</h1>
   <section id="socials">
     <p>You can find me at these places: </p>
-    <ul>
-      <li><a href="https://github.com/rhyses-pieces" rel="nofollow">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/irene-kim-1a8079115/" rel="nofollow">LinkedIn</a></li>
-      <li><a href="https://rhyses-pieces.itch.io/" rel="nofollow">Itch.io</a></li>
-    </ul>
+    
+    <div id="social-cards">
+      <article class="card">
+        <h2>
+          <span aria-hidden>GitHub</span>
+          <a href="https://github.com/rhyses-pieces" rel="nofollow">GitHub</a>
+        </h2>
+        <span class="arrow"></span>
+        <Icon name="github" />
+      </article>
+      <article class="card">
+        <h2>
+          <span aria-hidden>LinkedIn</span>
+          <a href="https://www.linkedin.com/in/irene-kim-1a8079115/" rel="nofollow">LinkedIn</a>
+        </h2>
+        <span class="arrow"></span>
+        <Icon name="linkedin" />
+      </article>
+      <article class="card">
+        <h2>
+          <span aria-hidden>Itch.io</span>
+          <a href="https://rhyses-pieces.itch.io/" rel="nofollow">Itch.io</a>
+        </h2>
+        <span class="arrow"></span>
+        <Icon name="itch" />
+      </article>
+    </div>
   </section>
 
   <p>... or you can: </p>
@@ -77,6 +100,81 @@ import Separator from "@/components/Separator.astro";
     --altcha-color-footer-bg: var(--secondary);
   }
 
+  #social-cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: 1rem;
+    width: 100%;
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-flow: row wrap-reverse;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75em;
+      border: var(--border) var(--border-color);
+      width: clamp(44px, 18ch, 35ch);
+      box-shadow: var(--box-shadow);
+      transition: all 0.5s ease-in-out;
+
+      &:nth-of-type(2n + 1) { transform: rotate(2deg); }
+      &:nth-of-type(3n) { transform: rotate(-1.5deg); }
+      &:hover {
+        box-shadow: 0 0 var(--border-color);
+
+        .arrow {
+          opacity: 1;
+          
+          @media (prefers-reduced-motion: no-preference) {
+            transform: translateX(0);
+          }
+        }
+      }
+
+      a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        padding: 1rem;
+      }
+
+      [data-icon] {
+        font-size: 2em;
+        color: var(--primary);
+      }
+
+      .arrow {
+        display: block;
+        opacity: 0;
+        width: 1em;
+        height: 1em;
+        background-color: var(--primary);
+        clip-path: polygon(100% 50%, 0 0, 0 100%);
+        transition: all 0.5s ease-in-out;
+
+        @media (prefers-reduced-motion: no-preference) {
+          transform: translateX(-0.5em);
+        }
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        font-weight: normal;
+
+        [aria-hidden] {
+          opacity: 0;
+          height: 0;
+          user-select: none;
+        }
+      }
+    }
+  }
+
   .link {
     cursor: pointer;
     background-color: transparent;
@@ -91,18 +189,19 @@ import Separator from "@/components/Separator.astro";
     &:has([data-state="verifying"]) * {
       transition: none;
       background-color: var(--text);
-      border: none;
+      text-decoration: none;
     }
   }
 
   #password {
     font-family: var(--accent-font);
     letter-spacing: 0.0175em;
+    line-height: 1;
     color: color-mix(in oklab, var(--text) 70%, var(--background));
   }
 
   #form {
-    margin: 0 2rem 5rem;
+    margin: 0 1rem 5rem;
     padding: 1rem;
     border: var(--border) var(--border-color);
     border-radius: var(--container-radius);

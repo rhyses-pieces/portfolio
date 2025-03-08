@@ -43,7 +43,7 @@ const { transitionName, title, id, date, tags, projectUrl, imageUrl, imageAlt, i
     <h1 transition:name={`project-${id}-header`}><a href={id}>{title}</a></h1>
     <a class="link" href={projectUrl} rel="nofollow">
       <span class="sr-only">Project link leading out to {projectUrl.includes("itch.io") ? "Itch.io" : "GitHub"}</span>
-      {projectUrl.includes("itch.io") ? <Icon name="itchio" /> : <Icon name="github" />}
+      {projectUrl.includes("itch.io") ? <Icon name="itch" /> : <Icon name="github" />}
     </a>
   </header>
   <Figure transition:name={`project-${id}-image`} src={imageUrl} alt={imageAlt} caption={imageCaption} />
