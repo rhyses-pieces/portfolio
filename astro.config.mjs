@@ -8,5 +8,5 @@ import keystatic from "@keystatic/astro";
 export default defineConfig({
   integrations: [icon({
     iconDir: "src/assets/icons"
-  }), react(), markdoc(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],
+  }), react(), markdoc(), ...(process.env.NODE_ENV == "development" ? [keystatic()] : [])],
 });
